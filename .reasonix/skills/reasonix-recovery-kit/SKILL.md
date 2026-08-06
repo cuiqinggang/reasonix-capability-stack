@@ -365,6 +365,7 @@ Reasonix 是 AI 编码工具，需从官方渠道安装。安装后：
 | 日期 | 变更 |
 |------|------|
 | 2026-08-05 | 技能包首次建立：整合当晚全部能力（13 技能/21 命令/7 规则/9 脚本/双知识库/记忆治理/多智能体），登记入 C:\AI\knowledge-brain 与 Reasonix memory |
+| 2026-08-06 | 补充：模型配置（4 模型/2 Provider/四级路由/复杂度评分）、环境变量设置、从零安装步骤（Reasonix CLI + PS7 + Python + ffmpeg）、GLM-4.6v 弃用历史；灾难恢复 SOP 重写为 4 阶段 13 步；上传至 GitHub 仓库 `github.com/cuiqinggang/reasonix-capability-stack`（多重备份） |
 | 持续 | （每次升级在此追加） |
 
 ---
