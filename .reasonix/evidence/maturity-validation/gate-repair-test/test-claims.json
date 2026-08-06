@@ -1,0 +1,34 @@
+{
+  "test_id": "gate-repair-loop-test",
+  "test_name": "Gate Review → Repair Loop → 复验 闭环测试",
+  "created": "2026-08-06T19:05:00+08:00",
+  "review_target": "Reasonix 成熟态生态站结构完整性（测试范围）",
+  "isolation": "仅验证 .reasonix/evidence/maturity-validation/gate-repair-test/ 内测试 claims",
+  "claims": [
+    {
+      "id": "CLAIM-01",
+      "description": "ENTRY.md 入口文件存在且非空",
+      "evidence_path": ".reasonix/ENTRY.md",
+      "expected_status": "ACCEPTED"
+    },
+    {
+      "id": "CLAIM-02",
+      "description": "rules/ 目录包含 7 个规则文件",
+      "evidence_path": ".reasonix/rules/",
+      "expected_status": "ACCEPTED"
+    },
+    {
+      "id": "CLAIM-03",
+      "description": "技能索引中注册了 'reasonix-nonexistent-skill' 技能",
+      "evidence_path": ".reasonix/skills/reasonix-nonexistent-skill/SKILL.md",
+      "expected_status": "REJECTED",
+      "defect_note": "【故意注入的缺陷】该技能目录不存在，索引中亦无此条目。Gate Review 应识别此缺陷并 REJECT。"
+    },
+    {
+      "id": "CLAIM-04",
+      "description": "CAPABILITY_MATRIX.json 中 CAP-10a（图片/截图）状态为 PASS_REAL_CALL",
+      "evidence_path": ".reasonix/registry/CAPABILITY_MATRIX.json",
+      "expected_status": "ACCEPTED"
+    }
+  ]
+}

@@ -1,0 +1,2 @@
+[permissions]
+allow = ["Bash=cd \"C:/Users/A/AppData/Roaming/reasonix/global-workspace/.reasonix\" && for f in commands/*.md; do echo \"===== $f ($(wc -l < $f) lines)\"; head -30 \"$f\"; done 2>/dev/null | head -150", "Bash=cd \"C:\\Users\\A\\AppData\\Roaming\\reasonix\\global-workspace\" && for f in .reasonix/skills/*/SKILL.md; do echo \"=== $f ===\"; head -15 \"$f\"; echo; done"]

@@ -1,0 +1,23 @@
+{
+  "checkpoint_id": "CKPT-STAGE1-20260806-184500",
+  "task_id": "maturity-validation-resume-test",
+  "stage": "STAGE-1/3",
+  "status": "completed",
+  "timestamp": "2026-08-06T18:45:00+08:00",
+  "completed_steps": [
+    "创建任务 spec (task-spec.json)",
+    "初始化计数器 counter.txt = 0",
+    "写入 checkpoint CKPT-STAGE1"
+  ],
+  "task_state": {
+    "counter_value": 0,
+    "counter_file": ".reasonix/evidence/maturity-validation/resume-test/counter.txt"
+  },
+  "context_summary": "三阶段跨会话恢复测试。阶段一完成：计数器初始化为 0。下一阶段需读取 counter.txt，递增到 1，写入 handoff。",
+  "next_stage": "STAGE-2/3：递增计数器并写入 handoff",
+  "remaining_steps": [
+    "读取 counter.txt 当前值",
+    "递增到 1 并写回",
+    "写入 handoff HANDOFF-STAGE2"
+  ]
+}

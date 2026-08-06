@@ -1,0 +1,32 @@
+{
+  "handoff_id": "HANDOFF-STAGE2-20260806-184510",
+  "task_id": "maturity-validation-resume-test",
+  "stage": "STAGE-2/3",
+  "status": "completed",
+  "timestamp": "2026-08-06T18:45:10+08:00",
+  "checkpoint_ref": ".reasonix/evidence/maturity-validation/resume-test/checkpoint-stage1.json",
+  "task_state": {
+    "counter_value": 1,
+    "counter_file": ".reasonix/evidence/maturity-validation/resume-test/counter.txt",
+    "previous_counter": 0
+  },
+  "completed_steps": [
+    "读取 checkpoint-stage1.json，确认 counter=0",
+    "递增 counter.txt 从 0 → 1",
+    "写入 handoff HANDOFF-STAGE2"
+  ],
+  "context_summary": "阶段二完成：计数器递增到 1。下一阶段（STAGE-3/3）需通过子智能体作为独立执行上下文执行 resume：读取 handoff + checkpoint，验证状态链完整性，递增计数器到 2，确认跨上下文恢复成功。",
+  "next_stage": "STAGE-3/3：子智能体 resume 恢复并完成",
+  "resume_instructions": {
+    "entry": "读取 HANDOFF-STAGE2-20260806-184510.json",
+    "checkpoint": "读取 checkpoint-stage1.json 交叉验证",
+    "expected_counter": 1,
+    "action": "递增 counter.txt 到 2，写入最终结果",
+    "verification": "验证 counter.txt 值 = 1（恢复前）→ 2（完成后），状态链完整"
+  },
+  "integrity": {
+    "stage_chain": "CKPT-STAGE1 → HANDOFF-STAGE2",
+    "counter_trace": "0 → 1",
+    "cross_session_required": true
+  }
+}

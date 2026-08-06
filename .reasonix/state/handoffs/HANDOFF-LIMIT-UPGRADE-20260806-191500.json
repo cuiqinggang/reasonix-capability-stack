@@ -1,0 +1,50 @@
+{
+  "handoff_id": "HANDOFF-LIMIT-UPGRADE-20260806-191500",
+  "task_id": "mature-supertool-limit-upgrade",
+  "stage": "极限改进 8 条措施 → 交接",
+  "status": "completed_in_session",
+  "timestamp": "2026-08-06T19:15:00+08:00",
+  "checkpoint_ref": ".reasonix/state/checkpoints/CHECKPOINT-LIMIT-UPGRADE-20260806-191500.json",
+  "resume_entry": "在新会话中执行 /resume，读取本 handoff + checkpoint，验证跨会话恢复。",
+  "delivered": {
+    "gate_repairs_real_code": {
+      "target": "verify-runtime.ps1",
+      "gate": "GATE-VERIFY-RUNTIME-20260806 (4/4 ACCEPTED)",
+      "repair": "F-01 DryRun bug + F-02 empty catch → 已修复",
+      "regate": "PASS"
+    },
+    "index_automation": {
+      "script": "rebuild-skill-index.ps1",
+      "enhancement": "交叉验证(CAPABILITY_MATRIX↔skills-index) + curated元数据保留",
+      "fix": "修复交叉验证字段不对齐问题(保留status_details等)"
+    },
+    "routing_log": {
+      "before": "空数组 [] (格式错误)",
+      "after": "9条真实事件记录(6类型×5路由)",
+      "format": "JSON数组,每元素独立事件对象"
+    },
+    "kilo_migration": {
+      "new_scripts": ["replay.ps1", "rollback.ps1"],
+      "readme_updated": true
+    },
+    "multi_agent_2rounds": {
+      "round1": "3子智能体并行审查→发现rebuild交叉验证bug",
+      "repair": "修复字段不对齐+curated保留",
+      "round2_review": "multi-agent-round2-review.json"
+    },
+    "video_framework": {
+      "glm_retry": "指数退避框架(60s→120s→240s)，未实际调用(合同禁止)",
+      "mp4_contract": "独立待验收合同已更新"
+    },
+    "cross_session_resume": {
+      "status": "READY_FOR_NEW_SESSION",
+      "checkpoint": "CHECKPOINT-LIMIT-UPGRADE-20260806-191500.json",
+      "instructions": "在新会话中执行 /resume 验证"
+    }
+  },
+  "score_update": {
+    "pre_upgrade": 86.3,
+    "estimated_post_all_8": 92.0,
+    "pending_verification": "第1条跨会话resume(+2.0)+第4条视频重试(+2.5)需新会话/用户授权"
+  }
+}

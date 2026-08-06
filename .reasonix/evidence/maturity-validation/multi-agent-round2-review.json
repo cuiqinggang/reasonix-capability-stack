@@ -1,0 +1,134 @@
+{
+  "review_id": "MULTI-AGENT-ROUND2-REVIEW",
+  "review_timestamp": "2026-08-06T19:45:00+08:00",
+  "reviewer": "复验 Gate Reviewer + 多角色审查者",
+  "task_context": "对本次极限改进的所有新产出进行审查：verify-runtime.ps1 修复复验、三个新脚本审查、routing-log 审查",
+
+  "task1_reverify_verify_runtime": {
+    "target": ".reasonix/scripts/verify-runtime.ps1",
+    "f01_dryrun_security_scan": {
+      "verdict": "PASS",
+      "detail": "第171行 `if (-not $DryRun)` 正确包裹了安全扫描循环（扫描文件读取/正则匹配），DryRun 模式下跳过实际 I/O。第194行 `$securityPass = if ($DryRun) { $true }` 在 DryRun 时显式设置 pass=true，且第196行将 `dry_run: true` 写入检查条目元数据，使 DryRun 语义透明化——不会将「未扫描」伪装为「真实安全检查通过」。",
+      "code_locations": [
+        "line 171: if (-not $DryRun) { ... scan loop ... }",
+        "line 194: $securityPass = if ($DryRun) { $true } else { $securityHits.Count -eq 0 }",
+        "line 196: dry_run = $DryRun.IsPresent in check entry"
+      ]
+    },
+    "f02_empty_catch_block": {
+      "verdict": "PASS",
+      "detail": "第189-191行 catch 块不再为空，包含 `Write-Status \"WARN\" \"Cannot read: $($f.FullName) — $_\"` 调用，可记录文件读取异常。脚本内仅此一个 catch 块，已全部修复。",
+      "code_locations": [
+        "line 189: } catch {",
+        "line 190: Write-Status \"WARN\" \"Cannot read: $($f.FullName) — $_\"",
+        "line 191: }"
+      ]
+    },
+    "overall_verdict": "PASS",
+    "notes": "两个先前缺陷均已修复。脚本功能完整，6类检查逻辑清晰，退出码行为正确（FAIL→1，ALL_PASS→0）。"
+  },
+
+  "task2_review_new_scripts": {
+    "replay_ps1": {
+      "file": ".reasonix/scripts/replay.ps1",
+      "verdict": "PASS",
+      "assessment": "完整可执行脚本。含参数块（Source 必填、OutputDir 可选、DryRun）、Write-Status 日志、错误处理（源文件不存在→exit 1）、checkpoint/handoff JSON 解析、integrity 检查（5项布尔指标）、双格式输出（JSON+TXT）、DryRun 预览模式。功能完整，代码结构清晰。",
+      "code_stats": {
+        "total_lines": 116,
+        "has_param_block": true,
+        "has_error_handling": true,
+        "has_dryrun_support": true,
+        "output_formats": ["JSON", "TXT"]
+      }
+    },
+    "rollback_ps1": {
+      "file": ".reasonix/scripts/rollback.ps1",
+      "verdict": "PASS",
+      "assessment": "完整可执行脚本。含参数块（CheckpointPath 必填、Force 开关、DryRun）、错误处理（checkpoint 不存在→exit 1）、三态行为：DryRun→预览回滚范围+exit 0；无 Force→警告+exit 2；Force→执行回滚+输出 JSON。安全设计合理，先预览后执行的流程正确。",
+      "code_stats": {
+        "total_lines": 72,
+        "has_param_block": true,
+        "has_error_handling": true,
+        "has_dryrun_support": true,
+        "has_safety_gate": true,
+        "exit_codes": "0=success/dryrun, 1=not_found, 2=force_required"
+      }
+    },
+    "rebuild_skill_index_cross_verify": {
+      "file": ".reasonix/scripts/rebuild-skill-index.ps1",
+      "verdict": "PARTIAL",
+      "assessment": "核心重建功能（扫描 SKILL.md→生成 SKILLS_INDEX.md + skills-index.json）正确。但新增的交叉验证功能（第157-238行）存在严重结构不匹配：",
+      "issues": [
+        {
+          "id": "XREF-01",
+          "severity": "HIGH",
+          "location": "lines 184-185",
+          "description": "交叉验证 Check 1 读取 `$skillIndex.summary.status_details.vision_review_image`，但 rebuild 生成的 skills-index.json summary 对象仅包含 `total_skill_dirs/with_skill_md/without_skill_md/skills_root`，无 `status_details` 字段。导致 `$indexVisionStatus` 始终回退为 \"NOT_FOUND\"，与 matrix CAP-10 子能力的 \"PASS_REAL_CALL\" 永远不一致。",
+          "fix_suggestion": "在生成 index 结构时保留或合并已有的 status_details；或从 CAPABILITY_MATRIX.json 直接交叉引用，而非依赖刚生成（不含该字段）的 index。"
+        },
+        {
+          "id": "XREF-02",
+          "severity": "HIGH",
+          "location": "lines 201-202",
+          "description": "交叉验证 Check 2 读取 `$skillIndex.summary.status_details.checkpoint_handoff_resume`，同上原因，该字段在 rebuild 后不存在，导致 `$indexCheckpointStatus` 始终为 \"NOT_FOUND\"。",
+          "fix_suggestion": "同 XREF-01。"
+        },
+        {
+          "id": "XREF-03",
+          "severity": "MEDIUM",
+          "location": "lines 214-216",
+          "description": "交叉验证 Check 3 对比 `$skillIndex.summary.skill_total`（build 生成的 summary 无此字段，回退为 0）与 `$skillIndex.skills.Count`（从数组读取，正确），导致永远不一致。实际应为 `$skillIndex.summary.with_skill_md` 或新增 `skill_total` 字段。",
+          "fix_suggestion": "将 `$indexSkillCount` 改为 `$skillIndex.summary.with_skill_md`；或在生成结构时新增 `skill_total` 字段。"
+        },
+        {
+          "id": "XREF-04",
+          "severity": "LOW",
+          "location": "lines 103-121 vs 147-160 (existing file)",
+          "description": "rebuild 生成的 skills-index.json 结构（version/generated_at/dry_run/summary{4 fields}/skills）与磁盘上现有 curated 结构（schema/generated/maintainer/note/skills{7 fields}/builtin_tools/summary{6 fields incl status_details}）完全不同。重建会丢失 manually curated 的 status_details、builtin_tools、schema 等元数据。",
+          "fix_suggestion": "考虑合并策略：保留已有 curated 字段，仅更新 skills 数组和 summary 中的目录统计。"
+        }
+      ],
+      "core_functionality_verdict": "PASS",
+      "cross_verify_verdict": "FAIL — 交叉验证三项检查均会因字段缺失产生假阳性 Mismatch",
+      "overall_verdict": "PARTIAL"
+    }
+  },
+
+  "task3_review_routing_log": {
+    "file": ".reasonix/state/routing-log.jsonl",
+    "format_check": {
+      "is_valid_json": true,
+      "structure": "JSON 数组（非严格 JSONL 逐行格式），含 9 个事件对象",
+      "note": "文件扩展名为 .jsonl 但内容为单 JSON 数组；功能上无碍，但若工具期望逐行 JSONL 则需调整格式。建议改为真正的 JSONL（每行一个 JSON 对象，无外层数组）或改扩展名为 .json。"
+    },
+    "event_count": 9,
+    "events": [
+      { "seq": 1, "timestamp": "2026-08-06T18:42:00+08:00", "event": "routing", "route": "multi_agent_parallel", "context": "阶段1" },
+      { "seq": 2, "timestamp": "2026-08-06T18:45:00+08:00", "event": "checkpoint", "route": "long_task", "context": "阶段3" },
+      { "seq": 3, "timestamp": "2026-08-06T18:45:10+08:00", "event": "handoff", "route": "long_task", "context": "阶段3" },
+      { "seq": 4, "timestamp": "2026-08-06T19:00:00+08:00", "event": "resume", "route": "subagent_equivalent", "context": "阶段3" },
+      { "seq": 5, "timestamp": "2026-08-06T19:05:00+08:00", "event": "gate_review", "route": "gate_repair_loop", "context": "阶段4" },
+      { "seq": 6, "timestamp": "2026-08-06T19:05:10+08:00", "event": "repair", "route": "gate_repair_loop", "context": "阶段4" },
+      { "seq": 7, "timestamp": "2026-08-06T19:05:20+08:00", "event": "gate_review", "route": "gate_repair_loop", "context": "阶段4" },
+      { "seq": 8, "timestamp": "2026-08-06T19:07:00+08:00", "event": "routing", "route": "multi_agent_parallel", "context": "阶段5" },
+      { "seq": 9, "timestamp": "2026-08-06T19:30:00+08:00", "event": "handoff", "route": "delivery", "context": "最终交付" }
+    ],
+    "coverage_analysis": {
+      "stages_covered": ["阶段1", "阶段3", "阶段4", "阶段5", "最终交付"],
+      "missing_stage_noted": "阶段2 无独立事件记录（可能合并入阶段1）",
+      "route_types_used": ["multi_agent_parallel", "long_task", "subagent_equivalent", "gate_repair_loop", "delivery"],
+      "event_types": ["routing", "checkpoint", "handoff", "resume", "gate_review", "repair"]
+    },
+    "verdict": "PASS"
+  },
+
+  "final_judgment": {
+    "task1_verify_runtime": "PASS",
+    "task2_replay": "PASS",
+    "task2_rollback": "PASS",
+    "task2_rebuild_skill_index": "PARTIAL",
+    "task3_routing_log": "PASS",
+    "overall": "PARTIAL",
+    "rationale": "修复复验全部通过（F-01/F-02），新脚本 replay/rollback 完整可用，routing-log 事件充足。唯一阻塞项为 rebuild-skill-index.ps1 的交叉验证功能存在严重结构不匹配（XREF-01/XREF-02/XREF-03），会导致交叉验证产生假阳性 Mismatch。核心重建功能不受影响，但交叉验证作为新功能未达可用标准。建议在下轮迭代中修复字段对齐问题（为生成结构新增 status_details/skill_total，或从 CAPABILITY_MATRIX.json 直接交叉引用）。"
+  }
+}

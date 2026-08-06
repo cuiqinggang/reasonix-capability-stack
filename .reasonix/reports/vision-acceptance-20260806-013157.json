@@ -1,0 +1,43 @@
+{
+  "acceptance": {
+    "task": "启用并验证图片/截图能力（glm-4.6v-flash）",
+    "time": "2026-08-06T01:31:57+08:00",
+    "result": "PASS",
+    "steps": [
+      {
+        "step": 1,
+        "item": "配置核对",
+        "detail": "glm-cn provider 配置 vision_models=[glm-4.6v-flash]，GLM_API_KEY 存在于 Reasonix 全局 .env（仅确认键存在，未读取值）",
+        "status": "PASS"
+      },
+      {
+        "step": 2,
+        "item": "一次真实视觉理解调用",
+        "detail": "模型 glm-4.6v-flash HTTP 200，耗时 9111ms，输入本地生成非敏感测试图 vision-test-20260806-013020.png",
+        "status": "PASS"
+      },
+      {
+        "step": 3,
+        "item": "验证返回依据图片内容",
+        "detail": "content_based=true：响应准确描述「左侧红色圆形、右侧蓝色正方形、下方黑色文字 RX-VISION-TEST」，与测试图一致，非泛泛回答",
+        "status": "PASS"
+      },
+      {
+        "step": 4,
+        "item": "状态更新",
+        "detail": "reasonix-vision-review 图片/截图能力状态更新为 CORE_PASS（SKILL.md + skills-index.json + SKILLS_INDEX.md + CAPABILITY_MATRIX.md/.json 同步）",
+        "status": "PASS"
+      },
+      {
+        "step": 5,
+        "item": "测试证据与验收",
+        "detail": "证据 evidence\\vision-call-evidence-20260806-013113.json + 本验收文件",
+        "status": "PASS"
+      }
+    ],
+    "evidence_file": "evidence\\vision-call-evidence-20260806-013113.json",
+    "api_keys_printed": false,
+    "api_keys_persisted": false,
+    "scope": "仅 glm-4.6v-flash 单模型单次调用；未测试其他模型/视频/音频/文件解析；未修改默认 DeepSeek 模型；未新增任何模型/技能/MCP/脚本/自动化/子智能体"
+  }
+}

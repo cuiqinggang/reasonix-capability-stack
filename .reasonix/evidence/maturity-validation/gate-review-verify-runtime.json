@@ -1,0 +1,123 @@
+{
+  "gate_review_id": "GATE-VERIFY-RUNTIME-20260806",
+  "review_target": ".reasonix/scripts/verify-runtime.ps1",
+  "timestamp": "2026-08-06T20:00:00Z",
+  "claims": [
+    {
+      "id": "CLAIM-A",
+      "description": "6 类验证（structure/rules/commands/evidence/index/security）全部可执行",
+      "score": "ACCEPTED",
+      "evidence": [
+        "Lines 59-83: Structure — 检查 9 个必填目录（skills/scripts/evidence/state/state\\checkpoints/state\\handoffs/reports/registry/rules/commands），逐项记录 pass/fail，写入 $results.categories['structure']",
+        "Lines 85-100: Rules — 统计 rules/ 目录文件数，>0 即为 PASS",
+        "Lines 102-117: Commands — 统计 commands/ 目录文件数，>0 即为 PASS",
+        "Lines 119-134: Evidence — 递归统计 evidence/ 目录文件数，>0 即为 PASS",
+        "Lines 136-156: Index — 检查 registry/ 下是否存在 SKILLS_INDEX.md 或 skills-index.json",
+        "Lines 158-204: Security — banned pattern 递归扫描，排除 node_modules/.git/backup，无命中即 PASS",
+        "所有类别均有独立代码块、结构化结果对象和错误处理（-ErrorAction SilentlyContinue / try-catch）"
+      ],
+      "caveats": [
+        "DryRun 模式下安全扫描完全跳过（$securityHits 保持空数组），security 类别会错误地报告 PASS 而非 SKIPPED — 这是一个轻微的语义不准确"
+      ]
+    },
+    {
+      "id": "CLAIM-B",
+      "description": "banned pattern 扫描覆盖 Hermes、旧路径、API Key 模式",
+      "score": "ACCEPTED",
+      "evidence": [
+        "Lines 162-169 定义 6 个 banned pattern：",
+        "  1. 'sk-[A-Za-z0-9]{20,}' — 匹配 OpenAI/Anthropic 等 API Key 前缀",
+        "  2. 'OPENROUTER_' + 'API_KEY' — 匹配 OpenRouter API Key（字符串拼接避免自扫描）",
+        "  3. 'Her' + 'mes' — 匹配旧工具名 Hermes（拼接避免自扫描）",
+        "  4. 'C:\\\\Users\\\\A' + '\\\\.codex' — 匹配旧路径 C:\\Users\\A\\.codex",
+        "  5. 'kilo\\.' + 'jsonc' — 匹配旧配置文件 kilo.jsonc",
+        "  6. '\\.' + 'kilo' — 匹配旧扩展名 .kilo",
+        "扫描范围：$ReasonixRoot 下递归所有文件，排除 node_modules、.git、backup（lines 172-177）",
+        "匹配逻辑：逐文件读取 Raw 内容后遍历所有 pattern，首次命中即 break（lines 178-189）"
+      ],
+      "caveats": [
+        "字符串拼接防自扫描技巧有效但脆弱 — 若未来维护者在脚本其他位置直接写入 'Hermes' 或 'OPENROUTER_API_KEY' 字面量，将导致该脚本自身被命中",
+        "catch 块完全为空（line 189），读取失败的静默跳过无任何日志，可能掩盖实际的文件访问问题"
+      ]
+    },
+    {
+      "id": "CLAIM-C",
+      "description": "输出格式为结构化 JSON（categories + summary + verdict）",
+      "score": "ACCEPTED",
+      "evidence": [
+        "$results 对象结构（lines 49-57）：version, timestamp, reasonix_root, dry_run, categories, summary, verdict",
+        "categories 包含 6 个子对象，每个均含 checks 数组和 passed/failed 计数",
+        "summary 包含 total_checks, passed, failed, warnings（line 55, line 207）",
+        "verdict 字段：ALL_PASS 或 FAIL（line 208）",
+        "failed_checks 数组列出所有失败项（line 210）",
+        "Line 218: ConvertTo-Json -Depth 6 输出到 reports/runtime-verify.json",
+        "JSON Depth 6 足够容纳嵌套的 checks 数组结构"
+      ],
+      "caveats": [
+        "warnings 字段始终硬编码为 0（line 207），该字段未被任何实际逻辑使用，属于预留但未实现的占位"
+      ]
+    },
+    {
+      "id": "CLAIM-D",
+      "description": "安全约束（不读取密钥、不修改文件）",
+      "score": "ACCEPTED",
+      "evidence": [
+        "只读扫描：安全检查通过 Get-Content -Raw 读取文件内容，但仅做 -match 比对，不提取或记录匹配的具体内容",
+        "安全命中日志仅记录文件路径和 pattern 名称（line 185: 'HIT: <file> <- <pattern>'），不输出匹配到的密钥值",
+        "唯一的写操作：创建 reports/ 目录（New-Item -Force, line 215）和写入 reports/runtime-verify.json（Set-Content, line 218），均属于预期的报告输出",
+        "不对任何 .reasonix 内的源文件、规则文件、命令文件做修改",
+        "全部路径使用 -LiteralPath（防御路径注入）",
+        "Try-catch 包裹文件读取操作（lines 179-189），防止单文件失败导致整个扫描崩溃"
+      ],
+      "caveats": [
+        "若 banned pattern 正则本身设计过于宽泛（如 'sk-[A-Za-z0-9]{20,}'），可能将非密钥的合法内容标记为命中 — 这不违反安全约束，但可能产生噪声",
+        "Get-Content -Raw 将整个文件加载到内存后再做 -match，大文件场景下内存效率不是最优，但在 .reasonix 上下文下风险可忽略"
+      ]
+    }
+  ],
+  "summary": {
+    "total_claims": 4,
+    "accepted": 4,
+    "rejected": 0,
+    "pending_evidence": 0,
+    "total_score": 4,
+    "overall": "ACCEPTED"
+  },
+  "findings": [
+    {
+      "severity": "LOW",
+      "id": "F-01",
+      "title": "DryRun 模式下 security 类别语义不准确",
+      "detail": "DryRun 时安全扫描被完全跳过（$securityHits 保持空数组），但 security.checks 仍报告 pass=true。建议在 DryRun 时将 security.checks 标记为 skipped 状态，或至少在 pass 字段外附加 dry_run_skipped 标志。",
+      "location": "lines 171-193"
+    },
+    {
+      "severity": "LOW",
+      "id": "F-02",
+      "title": "空 catch 块无日志输出",
+      "detail": "Line 189 的 catch {} 完全为空。若某文件因权限、编码或锁定原因无法读取，该失败将被静默忽略。建议至少添加 Write-Verbose 或写入 stderr 以便调试。",
+      "location": "line 189"
+    },
+    {
+      "severity": "INFO",
+      "id": "F-03",
+      "title": "warnings 字段硬编码为 0",
+      "detail": "$results.summary.warnings 始终设为 0（line 207），未在任何验证逻辑中被递增。这是一个预留但未实现的字段，可能导致消费者误以为脚本支持警告分级。",
+      "location": "line 207"
+    },
+    {
+      "severity": "INFO",
+      "id": "F-04",
+      "title": "Rules/Commands/Evidence 仅做数量检查",
+      "detail": "这三类验证仅检查文件数 > 0，不验证文件内容格式或有效性（例如 rules 是否包含必须字段、commands 是否有正确的 frontmatter）。在当前成熟度阶段可接受，但应在后续迭代中增强。",
+      "location": "lines 85-134"
+    }
+  ],
+  "recommendations": [
+    "R-01: 在 DryRun 模式下将 security 类别标记为 skipped 而非 passed，避免误导（关联 F-01）",
+    "R-02: 在 catch 块中添加 Write-Warning 或 Write-Error 日志（关联 F-02）",
+    "R-03: 实现 warnings 计数逻辑或从 summary 中移除该字段，避免消费者困惑（关联 F-03）",
+    "R-04: 为 rules/commands 添加最小格式校验（如检查 JSON 有效性或必填字段），提升验证深度（关联 F-04）",
+    "R-05: 考虑对 banned patterns 使用哈希或编码存储，降低维护时意外触发自扫描的风险"
+  ]
+}

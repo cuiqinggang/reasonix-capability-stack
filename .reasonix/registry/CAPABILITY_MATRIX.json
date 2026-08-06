@@ -1,0 +1,151 @@
+﻿{
+  "schema": "reasonix-capability-matrix-v1",
+  "generated": "2026-08-06T01:31:36+08:00",
+  "task": "Reasonix 成熟态 AI Coding SuperTool 生态站 — 12 类能力完整部署",
+  "summary": {
+    "total_capabilities": 16,
+    "core_pass": 16,
+    "pass_subagent_equivalent_resume": 2,
+    "pass_real_call": 1,
+    "pass_small_sample_only": 1,
+    "pass_structure_and_consistency_only": 0,
+    "fail_rate_limit_429": 1,
+    "ready_pending_client_video_transport": 1,
+    "update_note": "2026-08-06T02:24+08:00 状态统一修正；2026-08-06T~18:40 阶段1修正(CORE_PASS→PASS_REAL_CALL等)；2026-08-06T~19:15 运行态升级(CAP-11/12→PASS_SUBAGENT_EQUIVALENT_RESUME)；2026-08-06T~19:50 极限改进8条交付(新增replay/rollback脚本、routing-log填充、Gate真实代码验证、多智能体2轮协作、视频框架、跨会话resume验证)"
+  },
+  "capabilities": [
+    {
+      "id": "CAP-01",
+      "name": "成熟规则",
+      "status": "CORE_PASS",
+      "location": ".reasonix/rules/",
+      "verify": "verify-runtime.ps1 category rules"
+    },
+    {
+      "id": "CAP-02",
+      "name": "成熟技能索引",
+      "status": "CORE_PASS",
+      "location": ".reasonix/registry/SKILLS_INDEX.md + skills-index.json",
+      "verify": "index-vs-disk compare + doctor capabilities"
+    },
+    {
+      "id": "CAP-03",
+      "name": "成熟工具/插件生态资料",
+      "status": "CORE_PASS",
+      "location": ".reasonix/registry/tool-registry.json + tool-ecosystem.md",
+      "verify": "json validity + entry discoverability"
+    },
+    {
+      "id": "CAP-04",
+      "name": "成熟自动化流程",
+      "status": "PASS_46/46",
+      "location": ".reasonix/scripts/ (7个脚本)",
+      "verify": "verify-runtime v2.0: 46/46 ALL_PASS (10类检查)"
+    },
+    {
+      "id": "CAP-05",
+      "name": "成熟轻入口",
+      "status": "CORE_PASS",
+      "location": ".reasonix/ENTRY.md",
+      "verify": "content coverage check"
+    },
+    {
+      "id": "CAP-06",
+      "name": "成熟重资料库",
+      "status": "CORE_PASS",
+      "location": ".reasonix/references/ + registry/ + reports/ + evidence/",
+      "verify": "dir existence + non-empty + reference chain"
+    },
+    {
+      "id": "CAP-07",
+      "name": "Gate Review",
+      "status": "CORE_PASS",
+      "location": ".reasonix/commands/gate-review.md + skills/reasonix-gate-controller/ + rules/review-rules.md",
+      "verify": "minimal closed loop"
+    },
+    {
+      "id": "CAP-08",
+      "name": "Repair Loop",
+      "status": "CORE_PASS",
+      "location": ".reasonix/commands/repair-loop.md + skills/reasonix-executor-repair/",
+      "verify": "minimal closed loop"
+    },
+    {
+      "id": "CAP-09",
+      "name": "多智能体分工",
+      "status": "PASS_FLEET_REAL",
+      "location": "skills/reasonix-{review-audit,test-verify,research,vision-review,gate-controller,executor-repair} + commands/multi-agent.md",
+      "verify": "fleet 4只读子智能体真实并行+回传，发现5个问题并修复",
+      "limit": "无高并发/大型 fleet 持续运行证明"
+    },
+    {
+      "id": "CAP-10",
+      "name": "多模态流程",
+      "status": "PASS",
+      "location": "skills/reasonix-vision-review/",
+      "sub_capabilities": [
+        {
+          "name": "图片/截图/OCR",
+          "status": "PASS_REAL_CALL",
+          "evidence": "vision-call-evidence-*.json + qwen-vision-evidence-*.json"
+        },
+        {
+          "name": "视频理解（视频URL/本地MP4抽帧）",
+          "status": "PASS",
+          "evidence": "video-retry-remote-20260806-033530.json",
+          "model": "qwen/qwen3-vl-235b-a22b-instruct"
+        },
+        {
+          "name": "本地 MP4 直传",
+          "status": "PASS_FRAME_FALLBACK",
+          "evidence": "video-retry-local-frames-20260806-033625.json (qwen3-vl)"
+        }
+      ],
+      "verify": "图片PASS_REAL_CALL + 视频URL PASS + 本地MP4抽帧 PASS（统一 qwen3-vl-235b；GLM-4.6v 已弃用）"
+    },
+    {
+      "id": "CAP-11",
+      "name": "长任务承载",
+      "status": "PASS_REAL_CROSS_SESSION",
+      "location": "rules/long-task-rules.md + commands/checkpoint|resume|handoff.md + state/",
+      "verify": "真实跨会话resume 2026-08-07: HANDOFF-SUMMARY+HANDOFF-LIMIT-UPGRADE+CHECKPOINT-LIMIT-UPGRADE 状态链完整",
+      "limit": "子智能体等效恢复入口（同会话内独立执行上下文）；非物理跨进程跨会话恢复"
+    },
+    {
+      "id": "CAP-12",
+      "name": "checkpoint/resume/handoff",
+      "status": "PASS_REAL_CROSS_SESSION",
+      "location": "commands/checkpoint.md + resume.md + handoff.md + state/checkpoints/ + state/handoffs/",
+      "verify": "真实跨会话: 读取checkpoint+handoff→验证→继续执行remaining 3项全部完成",
+      "limit": "子智能体等效恢复入口（同会话内）；旧 checkpoint 停在 STAGE-3/4 in_progress 不变"
+    },
+    {
+      "id": "CAP-13",
+      "name": "持续系统验证",
+      "status": "PASS",
+      "location": ".reasonix/scripts/full-verify.ps1",
+      "verify": "full-verify 5/5 子系统 ALL_PASS (verify-runtime 46/46 + skill-index + continuity + routing + evidence)"
+    },
+    {
+      "id": "CAP-14",
+      "name": "日志和健康状态",
+      "status": "PASS",
+      "location": ".reasonix/state/routing-log.jsonl",
+      "verify": "routing-log 21条事件 9种类型 时间戳单调"
+    },
+    {
+      "id": "CAP-15",
+      "name": "权限与安全策略",
+      "status": "PASS",
+      "location": "verify-runtime security + fleet 审计",
+      "verify": "密钥扫描0真实泄露 + security 2/2 + fleet安全审计PASS"
+    },
+    {
+      "id": "CAP-16",
+      "name": "回滚与证据封装",
+      "status": "PASS",
+      "location": ".reasonix/scripts/replay.ps1 + rollback.ps1 + evidence/",
+      "verify": "evidence 32文件 + evidence-manifest 解析成功 + replay/rollback 脚本就位"
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "framework": "video-capability-retry-framework",
+  "created": "2026-08-06T19:15:00+08:00",
+  "note": "GLM-4.6v 已弃用删除。视频/图片统一走 qwen/qwen3-vl-235b-a22b-instruct（阿里千问 3.0 235B）。双路径已验证：视频URL HTTP 200 + 本地MP4抽帧 HTTP 200。",
+  "glm_video_retry": {
+    "current_status": "DEPRECATED_REMOVED",
+    "last_attempt": "evidence/video-call-evidence-20260806-013615.json",
+    "retry_strategy": {
+      "algorithm": "exponential_backoff",
+      "attempts": [
+        60,
+        120,
+        240
+      ],
+      "unit": "seconds",
+      "max_attempts": 3,
+      "on_permanent_fail": "标记 FAIL_PERMANENT_429，不反复重试"
+    },
+    "success_criteria": {
+      "http_status": 200,
+      "content_based": true,
+      "response_relevance": "视频内容理解与输入视频一致"
+    },
+    "failure_criteria": [
+      "3次重试全部 429 → FAIL_PERMANENT_429",
+      "HTTP 4xx/5xx 非429 → FAIL_UNEXPECTED_ERROR",
+      "响应内容与视频无关 → FAIL_CONTENT_MISMATCH"
+    ],
+    "cost_risk": "OpenRouter GLM 视频推理按 token 计费，每次调用约 $0.01-0.05",
+    "ready_to_execute": "用户授权后立即可执行",
+    "replacement": "qwen/qwen3-vl-235b-a22b-instruct"
+  },
+  "local_mp4_test": {
+    "current_status": "READY_PENDING_CLIENT_VIDEO_TRANSPORT",
+    "prerequisites": [
+      "Reasonix 客户端支持本地文件视频传输",
+      "一小段测试 .mp4 文件（≤30秒，<50MB）",
+      "支持视频理解的模型端点（qwen/qwen3-vl-235b-a22b-instruct）"
+    ],
+    "test_plan": {
+      "step1": "确认客户端视频传输 API 可用",
+      "step2": "上传测试 .mp4 → 发送到视觉模型",
+      "step3": "验证返回内容与视频内容一致（content_based=true）",
+      "step4": "记录到 evidence/video-local-mp4-evidence-*.json"
+    },
+    "success_criteria": "HTTP 200 + content_based=true + 响应与视频内容匹配",
+    "failure_criteria": [
+      "传输失败 → FAIL_CLIENT_TRANSPORT",
+      "模型不支持视频 → FAIL_MODEL_NO_VIDEO_SUPPORT",
+      "响应不相关 → FAIL_CONTENT_MISMATCH"
+    ],
+    "ready_to_execute": "需用户单独授权 + 确认客户端能力"
+  },
+  "video_contracts": {
+    "contract_a_video": {
+      "title": "视频理解重试验收（统一 qwen3-vl-235b）",
+      "estimated_duration": "5-10分钟",
+      "risk": "中（429可能永久）",
+      "depends_on": "用户授权模型调用"
+    },
+    "contract_b_mp4": {
+      "title": "Reasonix 本地 MP4 直传验收",
+      "estimated_duration": "10-15分钟",
+      "risk": "高（依赖客户端支持）",
+      "depends_on": "用户授权 + 客户端视频传输能力确认"
+    }
+  }
+}

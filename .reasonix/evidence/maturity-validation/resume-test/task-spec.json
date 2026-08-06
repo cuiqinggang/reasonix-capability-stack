@@ -1,0 +1,25 @@
+{
+  "task_id": "maturity-validation-resume-test",
+  "task_name": "成熟度验证跨会话恢复测试",
+  "created": "2026-08-06T18:45:00+08:00",
+  "stages": 3,
+  "description": "三阶段计数器测试：阶段一初始化→checkpoint，阶段二递增→handoff，阶段三（子智能体）resume→完成",
+  "stage_1": {
+    "name": "初始化计数器",
+    "action": "创建 counter.txt，写入值 0",
+    "checkpoint": true
+  },
+  "stage_2": {
+    "name": "递增计数器并交接",
+    "action": "读取 counter.txt，递增到 1，写回",
+    "handoff": true
+  },
+  "stage_3": {
+    "name": "恢复并完成",
+    "action": "读取 handoff + checkpoint，恢复计数器状态，递增到 2，验证完整链",
+    "resume": true
+  },
+  "success_criteria": "阶段三恢复后 counter=2，且状态链完整可审计",
+  "isolation": "仅在 .reasonix/evidence/maturity-validation/resume-test/ 内操作",
+  "no_sensitive_data": true
+}

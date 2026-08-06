@@ -1,0 +1,129 @@
+{
+  "schema": "reasonix-evidence-manifest-v1",
+  "generated": "2026-08-06T00:55:00+08:00",
+  "maintainer": "Reasonix 生态站部署（成熟态迁移）",
+  "note": "证据清单：登记本生态站的验证产物。所有证据均为 Reasonix 工作区内的文件，不含任何外部密钥、模型配置或旧路径。",
+  "evidence": [
+    {
+      "id": "EVD-001",
+      "name": "7 条成熟规则落盘",
+      "path": ".reasonix/rules/*.md",
+      "kind": "structure",
+      "status": "CORE_PASS",
+      "verified_by": "文件存在 + 内容与 Kilo 规则语义对应（评分体系/10 层测试/30 步阈值保留，模型路由剥离）"
+    },
+    {
+      "id": "EVD-002",
+      "name": "7 技能落盘且索引同步",
+      "path": ".reasonix/skills/ + .reasonix/registry/",
+      "kind": "structure",
+      "status": "CORE_PASS",
+      "verified_by": "skills/ 7 目录 + skills-index.json 7 项一一对应；SKILLS_INDEX.md 与 tool-ecosystem.md 覆盖"
+    },
+    {
+      "id": "EVD-003",
+      "name": "命令协议 10 个",
+      "path": ".reasonix/commands/",
+      "kind": "structure",
+      "status": "CORE_PASS",
+      "verified_by": "gate-review/repair-loop/multi-agent/checkpoint/resume/handoff/full-verify/smart-route/maturity-preflight/maturity-postflight + README 全部在位"
+    },
+    {
+      "id": "EVD-004",
+      "name": "目录契约完整",
+      "path": ".reasonix/",
+      "kind": "structure",
+      "status": "CORE_PASS",
+      "verified_by": "verify-runtime.ps1 要求的 10 目录全部存在"
+    }
+  ],
+  "summary": {
+    "total_evidence": 4,
+    "maturity_validation_total": 11,
+    "core_pass": 4,
+    "pending": 0,
+    "update_note": "2026-08-06T19:10+08:00 运行态升级阶段1-4新证据登记；2026-08-06T19:50+08:00 极限改进8条措施交付检查完成"
+  },
+  "maturity_validation_evidence": [
+    {
+      "id": "EVD-005",
+      "name": "跨上下文恢复测试（resume-test）",
+      "path": ".reasonix/evidence/maturity-validation/resume-test/",
+      "kind": "runtime",
+      "status": "PASS_SUBAGENT_EQUIVALENT_RESUME",
+      "verified_by": "三阶段 checkpoint→handoff→resume 恢复：CKPT-STAGE1(0)→HANDOFF-STAGE2(1)→RESUME-STAGE3(2)，4/4 验证 PASS"
+    },
+    {
+      "id": "EVD-006",
+      "name": "Gate Review → Repair Loop 闭环测试",
+      "path": ".reasonix/evidence/maturity-validation/gate-repair-test/",
+      "kind": "runtime",
+      "status": "PASS_REAL_CLOSED_LOOP",
+      "verified_by": "Gate Review Round1 REJECTED→Repair→Round2 ACCEPTED，五步闭环"
+    },
+    {
+      "id": "EVD-007",
+      "name": "成熟度 Preflight 基线快照",
+      "path": ".reasonix/evidence/maturity-validation/preflight-20260806-184200.json",
+      "kind": "verification",
+      "status": "PASS"
+    },
+    {
+      "id": "EVD-008",
+      "name": "Postflight 对比快照",
+      "path": ".reasonix/evidence/maturity-validation/postflight-20260806-192000.json",
+      "kind": "verification",
+      "status": "PASS"
+    },
+    {
+      "id": "EVD-009",
+      "name": "四角色多智能体闭环报告",
+      "path": ".reasonix/evidence/maturity-validation/four-role-closure-report.json",
+      "kind": "runtime",
+      "status": "PASS_FOUR_ROLE_SMALL_REAL_LOOP"
+    },
+    {
+      "id": "EVD-010",
+      "name": "Autoresearch 隔离报告",
+      "path": ".reasonix/evidence/maturity-validation/autoresearch-isolation-report.json",
+      "kind": "verification",
+      "status": "LEGACY_EXCLUDED"
+    },
+    {
+      "id": "EVD-011",
+      "name": "Gate Review 真实代码（verify-runtime.ps1）",
+      "path": ".reasonix/evidence/maturity-validation/gate-review-verify-runtime.json",
+      "kind": "runtime",
+      "status": "PASS (4/4 ACCEPTED)"
+    },
+    {
+      "id": "EVD-012",
+      "name": "Repair Log（verify-runtime F-01/F-02修复）",
+      "path": ".reasonix/evidence/maturity-validation/repair-log-verify-runtime.json",
+      "kind": "runtime",
+      "status": "REPAIRED"
+    },
+    {
+      "id": "EVD-013",
+      "name": "多智能体2轮协作审查",
+      "path": ".reasonix/evidence/maturity-validation/multi-agent-round2-review.json",
+      "kind": "runtime",
+      "status": "PARTIAL→修复后通过"
+    },
+    {
+      "id": "EVD-014",
+      "name": "视频能力重试框架",
+      "path": ".reasonix/evidence/maturity-validation/video-capability-framework.json",
+      "kind": "structure",
+      "status": "READY_PENDING_AUTH"
+    },
+    {
+      "id": "EVD-015",
+      "name": "跨会话 resume 等效验证",
+      "path": ".reasonix/evidence/maturity-validation/cross-session-resume-verify.json",
+      "kind": "runtime",
+      "status": "PASS",
+      "verified_by": "子智能体等效恢复入口：读取HANDOFF-SUMMARY+HANDOFF-LIMIT-UPGRADE+CHECKPOINT-LIMIT-UPGRADE，状态链完整，追加routing-log记录"
+    }
+  ]
+}

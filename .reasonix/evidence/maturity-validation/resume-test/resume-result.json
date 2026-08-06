@@ -1,0 +1,54 @@
+{
+  "resume_meta": {
+    "resume_id": "RESUME-STAGE3-20260806-190000",
+    "task_id": "maturity-validation-resume-test",
+    "stage": "STAGE-3/3",
+    "status": "completed",
+    "resume_timestamp": "2026-08-06T19:00:00+08:00",
+    "execution_context": "isolated-subagent",
+    "entry_handoff": "handoff-stage2.json",
+    "cross_verification_checkpoint": "checkpoint-stage1.json"
+  },
+  "pre_resume_verification": {
+    "handoff_counter_value": {
+      "expected": 1,
+      "actual": 1,
+      "result": "PASS"
+    },
+    "checkpoint_counter_value": {
+      "expected": 0,
+      "actual": 0,
+      "result": "PASS"
+    },
+    "state_chain_consistency": {
+      "detail": "CKPT-STAGE1(0) → HANDOFF-STAGE2(1)",
+      "result": "PASS"
+    },
+    "counter_file_matches_handoff": {
+      "expected": 1,
+      "actual": 1,
+      "result": "PASS"
+    }
+  },
+  "counter_state": {
+    "before_resume": 1,
+    "after_resume": 2
+  },
+  "complete_state_chain": {
+    "stage_1_checkpoint": {
+      "id": "CKPT-STAGE1-20260806-184500",
+      "counter_value": 0
+    },
+    "stage_2_handoff": {
+      "id": "HANDOFF-STAGE2-20260806-184510",
+      "counter_value": 1
+    },
+    "stage_3_resume": {
+      "id": "RESUME-STAGE3-20260806-190000",
+      "counter_value": 2
+    },
+    "trace": "0(CKPT) → 1(HANDOFF) → 2(RESUME)"
+  },
+  "cross_context_resume_verdict": "PASS",
+  "verdict_rationale": "所有四项恢复前验证均通过。状态链 0→1→2 完整一致。独立子智能体执行上下文中成功验证前置状态并完成递增，证明跨会话恢复机制工作正常。"
+}

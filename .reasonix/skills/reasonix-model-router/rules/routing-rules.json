@@ -1,0 +1,33 @@
+﻿{
+  "schema_version": 1,
+  "default_route": "deepseek_flash",
+  "explicit_commands": {
+    "/pro": "deepseek_pro",
+    "/flash": "deepseek_flash",
+    "/glm": "glm_controller",
+    "/vision": "qwen_vision",
+    "/auto": "auto"
+  },
+  "score_threshold": 8,
+  "pro_threshold": 4,
+  "score_tiers": {
+    "flash": {"min": 0, "max": 3, "desc": "简单任务：低延迟低成本"},
+    "pro": {"min": 4, "max": 7, "desc": "中等任务：质量更好"},
+    "glm": {"min": 8, "max": null, "desc": "复杂任务：GLM-5.2 智谱"}
+  },
+  "score_rules": {
+    "writes_files": 2,
+    "modifies_three_or_more_files": 2,
+    "five_or_more_steps": 2,
+    "five_or_more_minutes": 2,
+    "ambiguous": 2,
+    "cross_application_or_system": 2,
+    "credentials_security_delete_system": 4,
+    "previous_attempt_failed": 3,
+    "explicit_complex_analysis": 3
+  },
+  "direct_glm": ["gate_review", "repair_loop", "two_consecutive_failures"],
+  "multimodal_first": ["image", "photo", "screenshot", "ocr", "chart", "video_keyframe"],
+  "sticky_per_session": true,
+  "reclassify_on": ["explicit_command", "media_input", "risk_change", "complexity_change"]
+}

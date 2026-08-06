@@ -1,0 +1,299 @@
+﻿{
+    "version":  "2.0.0",
+    "timestamp":  "2026-08-06T04:32:55.2248859+08:00",
+    "failed_checks":  [
+
+                      ],
+    "dry_run":  false,
+    "summary":  {
+                    "total_checks":  46,
+                    "warnings":  0,
+                    "failed":  0,
+                    "passed":  46
+                },
+    "verdict":  "ALL_PASS",
+    "categories":  {
+                       "evidence":  {
+                                        "failed":  0,
+                                        "checks":  [
+                                                       {
+                                                           "pass":  true,
+                                                           "name":  "manifest_json_valid"
+                                                       },
+                                                       {
+                                                           "detail":  {
+                                                                          "count":  7
+                                                                      },
+                                                           "pass":  true,
+                                                           "name":  "evidence_top_level"
+                                                       },
+                                                       {
+                                                           "detail":  {
+                                                                          "count":  20
+                                                                      },
+                                                           "pass":  true,
+                                                           "name":  "maturity_validation"
+                                                       }
+                                                   ],
+                                        "passed":  3
+                                    },
+                       "security":  {
+                                        "failed":  0,
+                                        "checks":  [
+                                                       {
+                                                           "detail":  {
+                                                                          "hits":  0
+                                                                      },
+                                                           "pass":  true,
+                                                           "name":  "banned_pattern_scan"
+                                                       },
+                                                       {
+                                                           "detail":  {
+                                                                          "hits":  0
+                                                                      },
+                                                           "pass":  true,
+                                                           "name":  "secret_key_scan"
+                                                       }
+                                                   ],
+                                        "passed":  2
+                                    },
+                       "skills":  {
+                                      "failed":  0,
+                                      "checks":  [
+                                                     {
+                                                         "detail":  {
+                                                                        "expected":  11,
+                                                                        "found":  11
+                                                                    },
+                                                         "pass":  true,
+                                                         "name":  "skill_skilmd_present"
+                                                     },
+                                                     {
+                                                         "detail":  {
+                                                                        "checked":  11
+                                                                    },
+                                                         "pass":  true,
+                                                         "name":  "skill_frontmatter"
+                                                     },
+                                                     {
+                                                         "detail":  {
+                                                                        "absorbed":  4
+                                                                    },
+                                                         "pass":  true,
+                                                         "name":  "absorbed_skills"
+                                                     }
+                                                 ],
+                                      "passed":  3
+                                  },
+                       "rules":  {
+                                     "failed":  0,
+                                     "checks":  [
+                                                    {
+                                                        "pass":  true,
+                                                        "name":  "rule:core-rules.md"
+                                                    },
+                                                    {
+                                                        "pass":  true,
+                                                        "name":  "rule:coding-rules.md"
+                                                    },
+                                                    {
+                                                        "pass":  true,
+                                                        "name":  "rule:security-rules.md"
+                                                    },
+                                                    {
+                                                        "pass":  true,
+                                                        "name":  "rule:review-rules.md"
+                                                    },
+                                                    {
+                                                        "pass":  true,
+                                                        "name":  "rule:testing-rules.md"
+                                                    },
+                                                    {
+                                                        "pass":  true,
+                                                        "name":  "rule:long-task-rules.md"
+                                                    }
+                                                ],
+                                     "passed":  6
+                                 },
+                       "continuity":  {
+                                          "failed":  0,
+                                          "checks":  [
+                                                         {
+                                                             "pass":  true,
+                                                             "name":  "continuity_dir"
+                                                         },
+                                                         {
+                                                             "pass":  true,
+                                                             "name":  "continuity_lib"
+                                                         },
+                                                         {
+                                                             "detail":  {
+                                                                            "scripts":  5
+                                                                        },
+                                                             "pass":  true,
+                                                             "name":  "continuity_scripts"
+                                                         },
+                                                         {
+                                                             "detail":  {
+                                                                            "tasks":  2
+                                                                        },
+                                                             "pass":  true,
+                                                             "name":  "continuity_tasks"
+                                                         }
+                                                     ],
+                                          "passed":  4
+                                      },
+                       "structure":  {
+                                         "failed":  0,
+                                         "checks":  [
+                                                        {
+                                                            "pass":  true,
+                                                            "name":  "dir:skills"
+                                                        },
+                                                        {
+                                                            "pass":  true,
+                                                            "name":  "dir:scripts"
+                                                        },
+                                                        {
+                                                            "pass":  true,
+                                                            "name":  "dir:evidence"
+                                                        },
+                                                        {
+                                                            "pass":  true,
+                                                            "name":  "dir:state"
+                                                        },
+                                                        {
+                                                            "pass":  true,
+                                                            "name":  "dir:state\\checkpoints"
+                                                        },
+                                                        {
+                                                            "pass":  true,
+                                                            "name":  "dir:state\\handoffs"
+                                                        },
+                                                        {
+                                                            "pass":  true,
+                                                            "name":  "dir:state\\continuity"
+                                                        },
+                                                        {
+                                                            "pass":  true,
+                                                            "name":  "dir:reports"
+                                                        },
+                                                        {
+                                                            "pass":  true,
+                                                            "name":  "dir:registry"
+                                                        },
+                                                        {
+                                                            "pass":  true,
+                                                            "name":  "dir:rules"
+                                                        },
+                                                        {
+                                                            "pass":  true,
+                                                            "name":  "dir:commands"
+                                                        },
+                                                        {
+                                                            "pass":  true,
+                                                            "name":  "dir:evidence\\maturity-validation"
+                                                        },
+                                                        {
+                                                            "pass":  true,
+                                                            "name":  "dir:evidence\\video-frames"
+                                                        },
+                                                        {
+                                                            "pass":  true,
+                                                            "name":  "dir:skills\\reasonix-continuity\\lib"
+                                                        },
+                                                        {
+                                                            "pass":  true,
+                                                            "name":  "dir:skills\\reasonix-continuity\\scripts"
+                                                        }
+                                                    ],
+                                         "passed":  15
+                                     },
+                       "commands":  {
+                                        "failed":  0,
+                                        "checks":  [
+                                                       {
+                                                           "pass":  true,
+                                                           "name":  "cmd:checkpoint.md"
+                                                       },
+                                                       {
+                                                           "pass":  true,
+                                                           "name":  "cmd:resume.md"
+                                                       },
+                                                       {
+                                                           "pass":  true,
+                                                           "name":  "cmd:handoff.md"
+                                                       }
+                                                   ],
+                                        "passed":  3
+                                    },
+                       "index":  {
+                                     "failed":  0,
+                                     "checks":  [
+                                                    {
+                                                        "pass":  true,
+                                                        "name":  "registry:SKILLS_INDEX.md"
+                                                    },
+                                                    {
+                                                        "pass":  true,
+                                                        "name":  "registry:skills-index.json"
+                                                    },
+                                                    {
+                                                        "pass":  true,
+                                                        "name":  "registry:CAPABILITY_MATRIX.json"
+                                                    },
+                                                    {
+                                                        "pass":  true,
+                                                        "name":  "registry:tool-registry.json"
+                                                    }
+                                                ],
+                                     "passed":  4
+                                 },
+                       "state":  {
+                                     "failed":  0,
+                                     "checks":  [
+                                                    {
+                                                        "detail":  {
+                                                                       "count":  2
+                                                                   },
+                                                        "pass":  true,
+                                                        "name":  "checkpoints_present"
+                                                    },
+                                                    {
+                                                        "detail":  {
+                                                                       "count":  2
+                                                                   },
+                                                        "pass":  true,
+                                                        "name":  "handoffs_present"
+                                                    }
+                                                ],
+                                     "passed":  2
+                                 },
+                       "routing":  {
+                                       "failed":  0,
+                                       "checks":  [
+                                                      {
+                                                          "pass":  true,
+                                                          "name":  "routing_log_exists"
+                                                      },
+                                                      {
+                                                          "pass":  true,
+                                                          "name":  "routing_json_valid"
+                                                      },
+                                                      {
+                                                          "detail":  {
+                                                                         "types":  9
+                                                                     },
+                                                          "pass":  true,
+                                                          "name":  "routing_type_coverage"
+                                                      },
+                                                      {
+                                                          "pass":  true,
+                                                          "name":  "routing_timestamp_monotonic"
+                                                      }
+                                                  ],
+                                       "passed":  4
+                                   }
+                   },
+    "reasonix_root":  "C:\\Users\\A\\AppData\\Roaming\\reasonix\\global-workspace\\.reasonix"
+}

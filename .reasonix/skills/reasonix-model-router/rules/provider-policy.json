@@ -1,0 +1,43 @@
+{
+  "schema_version": 1,
+  "routes": {
+    "deepseek_flash": {
+      "provider": "deepseek",
+      "base_url": "https://api.deepseek.com",
+      "model": "deepseek-v4-flash",
+      "api_mode": "chat_completions",
+      "secret_env": "DEEPSEEK_API_KEY",
+      "silent_fallback": false
+    },
+    "deepseek_pro": {
+      "provider": "deepseek",
+      "base_url": "https://api.deepseek.com",
+      "model": "deepseek-v4-pro",
+      "api_mode": "chat_completions",
+      "secret_env": "DEEPSEEK_API_KEY",
+      "silent_fallback": false
+    },
+    "glm_controller": {
+      "provider": "openrouter",
+      "base_url": "https://openrouter.ai/api/v1",
+      "model": "z-ai/glm-5.2",
+      "api_mode": "chat_completions",
+      "secret_env": "OPENROUTER_API_KEY",
+      "silent_fallback": false
+    },
+    "qwen_vision": {
+      "provider": "openrouter",
+      "base_url": "https://openrouter.ai/api/v1",
+      "model": "qwen/qwen3-vl-235b-a22b-instruct",
+      "api_mode": "chat_completions",
+      "secret_env": "OPENROUTER_API_KEY",
+      "silent_fallback": false
+    }
+  },
+  "forbidden": {
+    "openrouter_deepseek": true,
+    "log_secret_values": true,
+    "pretend_vision_without_media": true,
+    "report_failure_as_success": true
+  }
+}

@@ -1,0 +1,121 @@
+﻿{
+    "generated":  "2026-08-06T06:21:29.9474458+08:00",
+    "summary":  {
+                    "skill_total":  14,
+                    "ready":  14
+                },
+    "skills":  [
+                   {
+                       "name":  "reasonix-continuity",
+                       "description":  "澧炲己鐗堥暱浠诲姟杩炵画鎬у紩鎿庘€斺€斿師瀛怞SON鍐欏叆+SHA256閾鹃獙璇?鎹熷潖鍥為€€+WAITING_USER淇濇寔+涓ョ璺虫+妯″瀷鍒囨崲鍘嗗彶銆備粠Hermes hermes-long-task-continuity鏍稿績搴?continuity.py V1.0)鏀硅繘鍚告敹锛岄€傞厤Reasonix宸ヤ綔鍖鸿矾寰勩€?runAs: inline",
+                       "size_bytes":  3468,
+                       "rel_dir":  "skills\\reasonix-continuity",
+                       "has_skill_md":  true,
+                       "runAs":  ""
+                   },
+                   {
+                       "name":  "reasonix-ecc-orchestration",
+                       "description":  "ECC鍥涜鑹插崄浜屽眰闂幆缂栨帓鈥斺€旀帶鍒?璧勬枡/宸ョ▼鎵ц/鐙珛瀹¤鍥涚被鐪熷疄鐙珛瑙掕壊锛屽崄浜屽眰鍥哄畾娴佺▼锛屾墽琛屸啋妫€鏌モ啋瀹¤鈫掕繑淇啋澶嶉獙闂幆銆備粠Hermes ecc-four-role-loop-orchestration V2.1.0鏀硅繘鍚告敹锛屽寮篟easonix澶氭櫤鑳戒綋鑳藉姏銆?runAs: inline",
+                       "size_bytes":  3753,
+                       "rel_dir":  "skills\\reasonix-ecc-orchestration",
+                       "has_skill_md":  true,
+                       "runAs":  ""
+                   },
+                   {
+                       "name":  "reasonix-evidence-repair",
+                       "description":  "鍏ㄩ噺璇佹嵁闂幆淇鈥斺€?2閬揋ate鏂规硶璁猴細鍚堝悓鈫掑奖鍝嶅浘鈫掑喕缁撯啋淇簮鈫掑叏閲忛噸寤衡啋姝ｈ礋楠岃瘉鈫掗暅鍍忎竴鑷存€р啋鐙珛楠岃瘉鍣ㄢ啋鍐峰惎鍔ㄢ啋瑙嗚璇箟鈫掔煩闃碘啋鍙戝竷銆備粠Hermes evidence-closed-loop-repair V1.0鐩存帴鍚告敹銆傝Е鍙戯細鍚屼竴闂杩斿伐2娆°€佹淳鐢熸枃浠舵湭鍚屾銆佹渶缁堝寘浠嶅惈鏃ч敊璇€?runAs: inline",
+                       "size_bytes":  3271,
+                       "rel_dir":  "skills\\reasonix-evidence-repair",
+                       "has_skill_md":  true,
+                       "runAs":  ""
+                   },
+                   {
+                       "name":  "reasonix-executor-repair",
+                       "description":  "",
+                       "size_bytes":  2646,
+                       "rel_dir":  "skills\\reasonix-executor-repair",
+                       "has_skill_md":  true,
+                       "runAs":  ""
+                   },
+                   {
+                       "name":  "reasonix-gate-controller",
+                       "description":  "",
+                       "size_bytes":  3143,
+                       "rel_dir":  "skills\\reasonix-gate-controller",
+                       "has_skill_md":  true,
+                       "runAs":  ""
+                   },
+                   {
+                       "name":  "reasonix-knowledge",
+                       "description":  "璁块棶鏈満 Knowledge Brain 闀挎湡鐭ヨ瘑搴擄紙Hermes/Codex 娌夋穩锛?13+ 鐭ヨ瘑鏉＄洰銆?55 鎶€鑳界储寮曘€?98 Obsidian 鏂囨。锛夈€傛寜 INDEX 鈫?ROUTING_MAP 鈫?鍒嗙被绱㈠紩 鈫?Top-K 鏂囨。鐨勬绱㈣矾寰勮幏鍙栬法浼氳瘽绉疮鐨勭煡璇嗐€佹妧鑳姐€佺粡楠屾暀璁€傝Е鍙戣瘝锛氭煡璇㈢煡璇嗗簱銆佽皟鐢ㄧ煡璇嗗簱銆侀暱鏈熻蹇嗘绱€並B 妫€绱€佺粡楠屾煡璇€?runAs: inline",
+                       "size_bytes":  3184,
+                       "rel_dir":  "skills\\reasonix-knowledge",
+                       "has_skill_md":  true,
+                       "runAs":  ""
+                   },
+                   {
+                       "name":  "reasonix-loop",
+                       "description":  "闀挎湡寰幆宸ョ▼鈥斺€斿悎鍚岄┍鍔ㄣ€佺姸鎬佹寔涔呫€佹父鏍囬槻閲嶃€佸箓绛夋仮澶嶃€佽繘鍖栧€欓€夈€丒CC鍗囩骇璺敱銆備粠Hermes loop-engineering V2.0鐩存帴鍚告敹銆傜敤浜庡畾鏃舵鏌ャ€佷簨浠堕┍鍔ㄣ€佹寔缁洃鎺с€佸懆鏈熺爺绌躲€佽法浼氳瘽鎭㈠銆?runAs: inline",
+                       "size_bytes":  2447,
+                       "rel_dir":  "skills\\reasonix-loop",
+                       "has_skill_md":  true,
+                       "runAs":  ""
+                   },
+                   {
+                       "name":  "reasonix-mature-core",
+                       "description":  "",
+                       "size_bytes":  7179,
+                       "rel_dir":  "skills\\reasonix-mature-core",
+                       "has_skill_md":  true,
+                       "runAs":  ""
+                   },
+                   {
+                       "name":  "reasonix-model-router",
+                       "description":  "鑷€傚簲澶氭ā鍨嬭矾鐢憋紙鍥涚骇闃舵锛夈€傜畝鍗?0-3鍒?鈫扗eepSeek V4 Flash锛涗腑绛?4-7鍒?鈫扗eepSeek V4 Pro锛涘鏉?鈮?鍒?/Gate/Repair/杩炵画澶辫触鈫扜LM-5.2(鏅鸿氨)锛涘獟浣撯啋qwen3-vl-235b(闃块噷鍗冮棶)銆傛彁渚涘鏉傚害璇勫垎銆佽矾鐢卞喅绛栥€佺湡瀹炴ā鍨嬭皟鐢ㄤ笁鍚堜竴銆備粠 Hermes adaptive-model-router 鏀硅繘鍚告敹銆?runAs: inline",
+                       "size_bytes":  4559,
+                       "rel_dir":  "skills\\reasonix-model-router",
+                       "has_skill_md":  true,
+                       "runAs":  ""
+                   },
+                   {
+                       "name":  "reasonix-recovery-kit",
+                       "description":  "Reasonix 涓撳睘鑳藉姏鎭㈠鎶€鑳藉寘锛氬畬鏁磋褰?13 鎶€鑳?21 鍛戒护/7 瑙勫垯/9 鑴氭湰/鍙岀煡璇嗗簱/璁板繂娌荤悊/澶氭櫤鑳戒綋/澶栭儴渚濊禆涓庡畨鍏ㄨ竟鐣岋紝鐢佃剳鎹熷潖鎴栫幆澧冮噸寤烘椂涓€娆℃€ф仮澶嶅叏閮ㄨ兘鍔涖€傝Е鍙戣瘝锛氭仮澶嶈兘鍔涖€侀噸寤虹幆澧冦€佹妧鑳藉寘銆乧apability restore銆乺ecovery銆佽兘鍔涘浠姐€?---",
+                       "size_bytes":  23097,
+                       "rel_dir":  "skills\\reasonix-recovery-kit",
+                       "has_skill_md":  true,
+                       "runAs":  ""
+                   },
+                   {
+                       "name":  "reasonix-research",
+                       "description":  "鍙璧勬枡鐮旂┒瀛愭櫤鑳戒綋锛氭枃浠?鍐呭鎼滅储銆佺洰褰曞垎鏋愩€佸紩鐢ㄨ拷韪€乄eb 妫€绱紝杈撳嚭甯︽潵婧愬紩鐢ㄧ殑缁撴瀯鍖栧彂鐜般€備笉淇敼浠讳綍鏂囦欢銆?runAs: subagent",
+                       "size_bytes":  1882,
+                       "rel_dir":  "skills\\reasonix-research",
+                       "has_skill_md":  true,
+                       "runAs":  ""
+                   },
+                   {
+                       "name":  "reasonix-review-audit",
+                       "description":  "鍙瀛愭櫤鑳戒綋锛氫唬鐮佸鏌?+ 瀹夊叏瀹¤銆傛鏌ヨ川閲?瀹夊叏/鍙淮鎶ゆ€э紝妫€娴嬬‖缂栫爜瀵嗛挜涓庢晱鎰熻矾寰勶紝杈撳嚭缁撴瀯鍖?JSON 缁撹銆備笉淇敼浠讳綍鏂囦欢銆?runAs: subagent",
+                       "size_bytes":  2543,
+                       "rel_dir":  "skills\\reasonix-review-audit",
+                       "has_skill_md":  true,
+                       "runAs":  ""
+                   },
+                   {
+                       "name":  "reasonix-test-verify",
+                       "description":  "娴嬭瘯楠岃瘉瀛愭櫤鑳戒綋锛氭墽琛屾祴璇曞懡浠ゃ€佹敹闆嗚緭鍑恒€佸垎鏋愮粨鏋滐紝杈撳嚭缁撴瀯鍖栨祴璇曟姤鍛婏紙PASS/PARTIAL/FAIL锛夈€備笉淇敼婧愮爜銆?runAs: subagent",
+                       "size_bytes":  1892,
+                       "rel_dir":  "skills\\reasonix-test-verify",
+                       "has_skill_md":  true,
+                       "runAs":  ""
+                   },
+                   {
+                       "name":  "reasonix-vision-review",
+                       "description":  "瑙嗚瀹℃煡瀛愭櫤鑳戒綋锛圴ision Review锛夛細瀵规埅鍥?鍥惧儚绫昏瘉鎹仛鍙鏍搁獙锛堝瓨鍦ㄦ€с€佸彲璇绘€с€佸唴瀹逛竴鑷存€с€丱CR 鏂囧瓧鎻愬彇锛夛紝杈撳嚭缁撴瀯鍖?JSON 缁撹銆傞€傞厤鑷?Kilo 瑙嗚鏅鸿兘浣撹亴璐ｏ紱鍥剧墖/鎴浘/瑙嗛甯ц兘鍔?PASS锛岀粺涓€瑙嗚妯″瀷锛氶樋閲屽崈闂?qwen/qwen3-vl-235b-a22b-instruct锛堢粡鐪熷疄璋冪敤楠岃瘉锛夈€?runAs: subagent",
+                       "size_bytes":  2995,
+                       "rel_dir":  "skills\\reasonix-vision-review",
+                       "has_skill_md":  true,
+                       "runAs":  ""
+                   }
+               ]
+}

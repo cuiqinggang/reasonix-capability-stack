@@ -1,0 +1,12 @@
+{
+  "repair_log": {
+    "repair_id": "REPAIR-GATE-TEST-20260806-190510",
+    "gate_review_ref": "GATE-REPAIR-TEST-ROUND1-20260806-190500",
+    "timestamp": "2026-08-06T19:05:10+08:00",
+    "rounds": 1,
+    "root_cause": "CLAIM-03 引用不存在的技能目录 'reasonix-nonexistent-skill'，该 claim 为测试中故意注入的缺陷，旨在验证 Gate Review 识别能力",
+    "fix_applied": "从 claims 列表中移除 CLAIM-03（虚假声明），保留 3 条真实 claims",
+    "files_changed": ["test-claims-v2.json（新建，移除 CLAIM-03）"],
+    "regression_check": "CLAIM-01/02/04 不受影响，无需回归"
+  }
+}

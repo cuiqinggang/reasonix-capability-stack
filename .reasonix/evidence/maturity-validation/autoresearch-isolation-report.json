@@ -1,0 +1,41 @@
+{
+  "schema": "reasonix-autoresearch-isolation-v1",
+  "timestamp": "2026-08-06T19:15:00+08:00",
+  "task": "阶段6：遗留 autoresearch 状态的安全隔离",
+
+  "directory": ".reasonix/autoresearch/20260805-182059-5-148-begin-5-148-ai-coding-supertool-reasonix-ai-coding/",
+  "contents": {
+    ".create_token": "存在(33 bytes) — 未读取",
+    "logs/heartbeat.jsonl": "空文件(0 bytes)",
+    "state/directions_tried.json": "空文件(0 bytes)",
+    "state/findings.jsonl": "空文件(0 bytes)",
+    "state/iteration_log.jsonl": "空文件(0 bytes)",
+    "state/progress.json": "status: running, iteration: 0",
+    "state/task_spec.json": "7843 bytes — 任务合同副本"
+  },
+
+  "reference_check": {
+    "ENTRY.md_directory_contract": "现在已标注 LEGACY_EXCLUDED_FROM_CURRENT_ECOSYSTEM",
+    "commands_reference": "无引用",
+    "rules_reference": "无引用",
+    "skills_reference": "无引用",
+    "scripts_reference": "无引用",
+    "registry_reference": "无引用",
+    "reports_reference": "仅在旧验收报告 mature-supertool-ecosystem-readonly-assessment 中提及为问题",
+    "HANDOFF-SUMMARY_reference": "已标注 LEGACY_EXCLUDED"
+  },
+
+  "isolation_verdict": "LEGACY_EXCLUDED_FROM_CURRENT_ECOSYSTEM",
+  "verdict_rationale": "该目录是上一次只读验收任务的遗留会话状态。所有日志文件为空(未实际运行),唯一的实质文件是任务合同副本。不被任何当前入口、命令、规则、技能或索引引用。已在 ENTRY.md 目录契约中标注 LEGACY。遵循'不删除原有文件'原则保留原位。",
+
+  "security_note": "未读取 .create_token 内容。未打印、复制或解析该文件。仅记录其存在性(33 bytes)。",
+
+  "actions_taken": [
+    "ENTRY.md 目录契约添加 autoresearch/ LEGACY 标记",
+    "HANDOFF-SUMMARY.md 更新隔离结论",
+    "本报告记录完整隔离证据"
+  ],
+
+  "no_files_deleted": true,
+  "no_token_read": true
+}

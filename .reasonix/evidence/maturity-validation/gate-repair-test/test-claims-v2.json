@@ -1,0 +1,23 @@
+{
+  "test_id": "gate-repair-loop-test",
+  "version": 2,
+  "repair_ref": "REPAIR-GATE-TEST-20260806-190510",
+  "note": "修正版：已移除虚假 CLAIM-03",
+  "claims": [
+    {
+      "id": "CLAIM-01",
+      "description": "ENTRY.md 入口文件存在且非空",
+      "evidence_path": ".reasonix/ENTRY.md"
+    },
+    {
+      "id": "CLAIM-02",
+      "description": "rules/ 目录包含 7 个规则文件",
+      "evidence_path": ".reasonix/rules/"
+    },
+    {
+      "id": "CLAIM-04",
+      "description": "CAPABILITY_MATRIX.json 中 CAP-10a（图片/截图）状态为 PASS_REAL_CALL",
+      "evidence_path": ".reasonix/registry/CAPABILITY_MATRIX.json"
+    }
+  ]
+}

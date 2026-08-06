@@ -1,0 +1,168 @@
+{
+  "schema": "reasonix-tool-registry-v1",
+  "generated": "2026-08-03T23:40:00+08:00",
+  "maintainer": "Reasonix 生态站 · 技能索引与工具生态写入智能体",
+  "note": "Reasonix 工具/插件生态注册表:内置工具 + 用户可用技能类工具。本文件不含任何外部密钥、模型配置或旧路径。",
+  "categories": [
+    {
+      "category": "reasonix-builtin",
+      "label": "Reasonix 内置工具(审查/测试/研究/子代理/基础)",
+      "tools": [
+        {"name": "review", "capability": "内置代码审查:只读质量/安全/可维护性检查", "entry": "tool: review", "status": "READY"},
+        {"name": "security_review", "capability": "内置安全审查:密钥/权限/依赖/数据泄露审计", "entry": "tool: security_review", "status": "READY"},
+        {"name": "test", "capability": "内置测试流程:驱动测试执行与结果验证", "entry": "/test", "status": "READY"},
+        {"name": "explore", "capability": "项目/目录探索与结构理解", "entry": "/explore", "status": "READY"},
+        {"name": "research", "capability": "资料研究:检索、引用追踪、Web 获取", "entry": "/research", "status": "READY"},
+        {"name": "task", "capability": "子任务执行:派发带工具白名单的子智能体", "entry": "tool: task", "status": "READY"},
+        {"name": "parallel_tasks", "capability": "并行子任务:同时派发多个独立只读子智能体", "entry": "tool: parallel_tasks", "status": "READY"},
+        {"name": "fleet", "capability": "舰队模式:大规模并行子智能体编排", "entry": "tool: fleet", "status": "READY"},
+        {"name": "read_only_task", "capability": "只读研究子智能体派发(隔离上下文,仅只读工具)", "entry": "tool: read_only_task", "status": "READY"},
+        {"name": "read_only_skill", "capability": "只读技能调用(子代理型技能的只读执行)", "entry": "tool: read_only_skill", "status": "READY"},
+        {"name": "run_skill", "capability": "技能运行入口:加载并执行索引内技能", "entry": "tool: run_skill", "status": "READY"},
+        {"name": "slash_command", "capability": "斜杠命令入口:调用项目/内置命令模板", "entry": "tool: slash_command", "status": "READY"},
+        {"name": "web_fetch", "capability": "网页抓取:HTTPS 内容获取(HTML 转文本/JSON 原样返回)", "entry": "tool: web_fetch", "status": "READY"},
+        {"name": "bash", "capability": "命令执行:受管控的命令行环境", "entry": "tool: bash", "status": "READY"},
+        {"name": "todo_write", "capability": "任务清单维护与进度跟踪", "entry": "tool: todo_write", "status": "READY"},
+        {"name": "docs", "capability": "Reasonix 官方文档检索与阅读", "entry": "tool: docs", "status": "READY"}
+      ]
+    },
+    {
+      "category": "content-baoyu",
+      "label": "内容创作与发布技能类(baoyu 系列)",
+      "tools": [
+        {"name": "baoyu-article-illustrator", "capability": "文章配图:分析结构、定位插图点位、按类型×风格×配色生成插画", "entry": "/baoyu-article-illustrator", "status": "READY"},
+        {"name": "baoyu-comic", "capability": "知识漫画创作:多画风、分镜布局、批量图像生成", "entry": "/baoyu-comic", "status": "READY"},
+        {"name": "baoyu-compress-image", "capability": "图片压缩:WebP/PNG 优化与自动选型", "entry": "/baoyu-compress-image", "status": "READY"},
+        {"name": "baoyu-cover-image", "capability": "文章封面图生成:类型/配色/渲染/文字/情绪五维组合", "entry": "/baoyu-cover-image", "status": "READY"},
+        {"name": "baoyu-danger-gemini-web", "capability": "反向工程 Web 图像/文本生成后端(需用户同意)", "entry": "/baoyu-danger-gemini-web", "status": "READY"},
+        {"name": "baoyu-danger-x-to-markdown", "capability": "X(Twitter)推文/文章转 Markdown(需用户同意)", "entry": "/baoyu-danger-x-to-markdown", "status": "READY"},
+        {"name": "baoyu-diagram", "capability": "专业深色 SVG 图表:架构图/流程图/时序图/思维导图等", "entry": "/baoyu-diagram", "status": "READY"},
+        {"name": "baoyu-electron-extract", "capability": "Electron 应用资源与源码提取(.asar 还原)", "entry": "/baoyu-electron-extract", "status": "READY"},
+        {"name": "baoyu-format-markdown", "capability": "Markdown/纯文本格式化:frontmatter、标题、列表、代码块", "entry": "/baoyu-format-markdown", "status": "READY"},
+        {"name": "baoyu-image-gen", "capability": "AI 图像生成:多提供商适配,文生图/参考图/批量", "entry": "/baoyu-image-gen", "status": "READY"},
+        {"name": "baoyu-infographic", "capability": "信息图生成:21 布局 × 22 视觉风格,发布级输出", "entry": "/baoyu-infographic", "status": "READY"},
+        {"name": "baoyu-markdown-to-html", "capability": "Markdown 转微信兼容 HTML:高亮、数学、Mermaid、脚注", "entry": "/baoyu-markdown-to-html", "status": "READY"},
+        {"name": "baoyu-post-to-wechat", "capability": "发布微信公众号:文章/贴图文,支持 HTML/Markdown/纯文本", "entry": "/baoyu-post-to-wechat", "status": "READY"},
+        {"name": "baoyu-post-to-weibo", "capability": "发布微博:普通博文与头条文章", "entry": "/baoyu-post-to-weibo", "status": "READY"},
+        {"name": "baoyu-post-to-x", "capability": "发布 X(Twitter):普通帖与长文", "entry": "/baoyu-post-to-x", "status": "READY"},
+        {"name": "baoyu-slide-deck", "capability": "演示幻灯片生成:大纲→风格→逐页图像", "entry": "/baoyu-slide-deck", "status": "READY"},
+        {"name": "baoyu-translate", "capability": "翻译:多语言互译与格式保留", "entry": "/baoyu-translate", "status": "READY"},
+        {"name": "baoyu-url-to-markdown", "capability": "URL 转 Markdown:站点适配器、登录/CAPTCHA 处理", "entry": "/baoyu-url-to-markdown", "status": "READY"},
+        {"name": "baoyu-wechat-summary", "capability": "微信群聊精华摘要:结构化 digest,含隐私护栏", "entry": "/baoyu-wechat-summary", "status": "READY"},
+        {"name": "baoyu-xhs-images", "capability": "小红书/社交图片卡片系列:12 风格 × 8 布局", "entry": "/baoyu-xhs-images", "status": "READY"},
+        {"name": "baoyu-youtube-transcript", "capability": "YouTube 字幕/脚本下载与翻译、章节、说话人识别", "entry": "/baoyu-youtube-transcript", "status": "READY"}
+      ]
+    },
+    {
+      "category": "web-firecrawl",
+      "label": "网页抓取与研究技能类(firecrawl 系列)",
+      "tools": [
+        {"name": "firecrawl", "capability": "Firecrawl 基础:网页抓取与提取", "entry": "/firecrawl", "status": "READY"},
+        {"name": "firecrawl-agent", "capability": "智能体式抓取:多步网页任务", "entry": "/firecrawl-agent", "status": "READY"},
+        {"name": "firecrawl-build-interact", "capability": "抓取构建:交互式网页操作", "entry": "/firecrawl-build-interact", "status": "READY"},
+        {"name": "firecrawl-build-onboarding", "capability": "抓取构建:上手引导", "entry": "/firecrawl-build-onboarding", "status": "READY"},
+        {"name": "firecrawl-build-scrape", "capability": "抓取构建:页面抓取", "entry": "/firecrawl-build-scrape", "status": "READY"},
+        {"name": "firecrawl-build-search", "capability": "抓取构建:网页搜索", "entry": "/firecrawl-build-search", "status": "READY"},
+        {"name": "firecrawl-company-directories", "capability": "企业目录抓取与整理", "entry": "/firecrawl-company-directories", "status": "READY"},
+        {"name": "firecrawl-competitive-intel", "capability": "竞争情报搜集与分析", "entry": "/firecrawl-competitive-intel", "status": "READY"},
+        {"name": "firecrawl-crawl", "capability": "整站爬取", "entry": "/firecrawl-crawl", "status": "READY"},
+        {"name": "firecrawl-dashboard-reporting", "capability": "数据面板与报告抓取", "entry": "/firecrawl-dashboard-reporting", "status": "READY"},
+        {"name": "firecrawl-deep-research", "capability": "深度研究:多源资料聚合", "entry": "/firecrawl-deep-research", "status": "READY"},
+        {"name": "firecrawl-demo-walkthrough", "capability": "演示与产品走查抓取", "entry": "/firecrawl-demo-walkthrough", "status": "READY"},
+        {"name": "firecrawl-download", "capability": "文件下载管理", "entry": "/firecrawl-download", "status": "READY"},
+        {"name": "firecrawl-interact", "capability": "网页交互自动化", "entry": "/firecrawl-interact", "status": "READY"},
+        {"name": "firecrawl-knowledge-base", "capability": "知识库构建与检索", "entry": "/firecrawl-knowledge-base", "status": "READY"},
+        {"name": "firecrawl-knowledge-ingest", "capability": "知识库内容摄取", "entry": "/firecrawl-knowledge-ingest", "status": "READY"},
+        {"name": "firecrawl-lead-gen", "capability": "线索生成与挖掘", "entry": "/firecrawl-lead-gen", "status": "READY"},
+        {"name": "firecrawl-lead-research", "capability": "线索调研", "entry": "/firecrawl-lead-research", "status": "READY"},
+        {"name": "firecrawl-map", "capability": "站点地图/URL 发现", "entry": "/firecrawl-map", "status": "READY"},
+        {"name": "firecrawl-market-research", "capability": "市场研究", "entry": "/firecrawl-market-research", "status": "READY"},
+        {"name": "firecrawl-monitor", "capability": "网页监控与变更检测", "entry": "/firecrawl-monitor", "status": "READY"},
+        {"name": "firecrawl-parse", "capability": "内容解析与结构化提取", "entry": "/firecrawl-parse", "status": "READY"},
+        {"name": "firecrawl-qa", "capability": "基于抓取内容的问答", "entry": "/firecrawl-qa", "status": "READY"},
+        {"name": "firecrawl-research-papers", "capability": "研究论文检索与抓取", "entry": "/firecrawl-research-papers", "status": "READY"},
+        {"name": "firecrawl-scrape", "capability": "单页抓取与清理", "entry": "/firecrawl-scrape", "status": "READY"},
+        {"name": "firecrawl-search", "capability": "网页搜索", "entry": "/firecrawl-search", "status": "READY"},
+        {"name": "firecrawl-seo-audit", "capability": "SEO 审计", "entry": "/firecrawl-seo-audit", "status": "READY"},
+        {"name": "firecrawl-shop", "capability": "电商/店铺数据抓取", "entry": "/firecrawl-shop", "status": "READY"},
+        {"name": "firecrawl-website-design-clone", "capability": "网站设计克隆/采集", "entry": "/firecrawl-website-design-clone", "status": "READY"},
+        {"name": "firecrawl-workflows", "capability": "抓取工作流编排", "entry": "/firecrawl-workflows", "status": "READY"}
+      ]
+    },
+    {
+      "category": "video-hyperframes",
+      "label": "视频与动效技能类(hyperframes 系列)",
+      "tools": [
+        {"name": "hyperframes", "capability": "HyperFrames 总入口:视频/动效构建决策", "entry": "/hyperframes", "status": "READY"},
+        {"name": "hyperframes-animation", "capability": "原子动效模式与场景蓝图库", "entry": "/hyperframes-animation", "status": "READY"},
+        {"name": "hyperframes-cli", "capability": "HyperFrames CLI 开发循环与云渲染(Lambda)", "entry": "/hyperframes-cli", "status": "READY"},
+        {"name": "hyperframes-core", "capability": "合成项目契约:结构、时间属性、确定性渲染", "entry": "/hyperframes-core", "status": "READY"},
+        {"name": "hyperframes-creative", "capability": "非动效创意方向:调色板、排版、旁白、节奏", "entry": "/hyperframes-creative", "status": "READY"},
+        {"name": "hyperframes-keyframes", "capability": "关键帧与动画曲线定义", "entry": "/hyperframes-keyframes", "status": "READY"},
+        {"name": "hyperframes-registry", "capability": "注册表组件安装、接线与贡献", "entry": "/hyperframes-registry", "status": "READY"},
+        {"name": "embedded-captions", "capability": "说话人头像字幕合成:36 种视觉身份,本地端到端", "entry": "/embedded-captions", "status": "READY"},
+        {"name": "faceless-explainer", "capability": "无面讲解视频:文字/图形/数据可视化逐场景生成", "entry": "/faceless-explainer", "status": "READY"},
+        {"name": "general-video", "capability": "通用视频构建入口", "entry": "/general-video", "status": "READY"},
+        {"name": "media-use", "capability": "媒体资产处理:音图素材解析、TTS、字幕、转码", "entry": "/media-use", "status": "READY"},
+        {"name": "motion-graphics", "capability": "动态图形设计与编排", "entry": "/motion-graphics", "status": "READY"},
+        {"name": "music-to-video", "capability": "音乐节奏驱动视频:歌词/幻灯片/动态促销", "entry": "/music-to-video", "status": "READY"},
+        {"name": "pr-to-video", "capability": "GitHub PR 转代码变更讲解视频", "entry": "/pr-to-video", "status": "READY"},
+        {"name": "product-launch-video", "capability": "产品发布/推广视频", "entry": "/product-launch-video", "status": "READY"},
+        {"name": "remotion-to-hyperframes", "capability": "Remotion 源码迁移到 HyperFrames(单向)", "entry": "/remotion-to-hyperframes", "status": "READY"},
+        {"name": "slideshow", "capability": "幻灯片视频制作", "entry": "/slideshow", "status": "READY"},
+        {"name": "talking-head-recut", "capability": "访谈/播客视频图文覆盖包装", "entry": "/talking-head-recut", "status": "READY"},
+        {"name": "website-to-video", "capability": "网站截图转站点导览视频", "entry": "/website-to-video", "status": "READY"}
+      ]
+    },
+    {
+      "category": "workflow",
+      "label": "工程工作流技能类(规划/执行/验证/审查)",
+      "tools": [
+        {"name": "brainstorming", "capability": "创意工作前的需求与设计探索", "entry": "/brainstorming", "status": "READY"},
+        {"name": "dispatching-parallel-agents", "capability": "并行子智能体派发(独立任务)", "entry": "/dispatching-parallel-agents", "status": "READY"},
+        {"name": "executing-plans", "capability": "执行已写好的实现计划(独立会话 + 审查节点)", "entry": "/executing-plans", "status": "READY"},
+        {"name": "finishing-a-development-branch", "capability": "开发分支收尾", "entry": "/finishing-a-development-branch", "status": "READY"},
+        {"name": "find-skills", "capability": "技能发现与安装(npx skills 生态)", "entry": "/find-skills", "status": "READY"},
+        {"name": "receiving-code-review", "capability": "接收代码审查反馈时的技术严谨处理", "entry": "/receiving-code-review", "status": "READY"},
+        {"name": "requesting-code-review", "capability": "任务完成/合并前主动请求代码审查", "entry": "/requesting-code-review", "status": "READY"},
+        {"name": "subagent-driven-development", "capability": "子智能体驱动开发:任务间审查", "entry": "/subagent-driven-development", "status": "READY"},
+        {"name": "systematic-debugging", "capability": "系统化调试:定位 Bug 的根因", "entry": "/systematic-debugging", "status": "READY"},
+        {"name": "test-driven-development", "capability": "测试驱动开发:先写测试再实现", "entry": "/test-driven-development", "status": "READY"},
+        {"name": "using-git-worktrees", "capability": "Git worktree 隔离工作区", "entry": "/using-git-worktrees", "status": "READY"},
+        {"name": "using-superpowers", "capability": "会话启动:技能发现与使用入口", "entry": "/using-superpowers", "status": "READY"},
+        {"name": "verification-before-completion", "capability": "完成前验证:先跑验证命令再声明成功", "entry": "/verification-before-completion", "status": "READY"},
+        {"name": "writing-plans", "capability": "实现计划编写", "entry": "/writing-plans", "status": "READY"},
+        {"name": "writing-skills", "capability": "新技能编写/编辑/部署前验证", "entry": "/writing-skills", "status": "READY"}
+      ]
+    },
+    {
+      "category": "design-frontend",
+      "label": "设计与前端技能类",
+      "tools": [
+        {"name": "figma", "capability": "Figma 内容导入 HyperFrames 合成", "entry": "/figma", "status": "READY"},
+        {"name": "frontend-design", "capability": "前端设计:页面与组件实现", "entry": "/frontend-design", "status": "READY"},
+        {"name": "ui-ux-pro-max", "capability": "UI/UX 设计智能库:风格/配色/字体/指南检索", "entry": "/ui-ux-pro-max", "status": "READY"}
+      ]
+    },
+    {
+      "category": "utility",
+      "label": "工具类技能",
+      "tools": [
+        {"name": "universal-playwright-cli-browser-automation", "capability": "通用 Playwright CLI 浏览器自动化:打开/定位/快照/点击/表单/截图/测试/抓取", "entry": "/universal-playwright-cli-browser-automation", "status": "READY"},
+        {"name": "windows-system-drive-cleanup", "capability": "Windows 系统盘安全审计与清理(默认只读审计)", "entry": "/windows-system-drive-cleanup", "status": "READY"}
+      ]
+    }
+  ],
+  "summary": {
+    "total_tools": 106,
+    "reasonix_builtin": 16,
+    "content_baoyu": 21,
+    "web_firecrawl": 30,
+    "video_hyperframes": 19,
+    "workflow": 15,
+    "design_frontend": 3,
+    "utility": 2,
+    "ready": 106,
+    "ready_pending_provider_config": 0
+  }
+}

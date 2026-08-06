@@ -1,0 +1,42 @@
+# Reasonix 能力栈 — .gitignore
+# 排除运行时数据、会话、临时文件；只保留可恢复的能力文件
+
+# 运行时与缓存
+sessions/
+tasks/
+tmp/
+*.lock
+
+# 自动研究（LEGACY）
+.reasonix/autoresearch/
+
+# 证据中的大文件（截图、视频帧）
+.reasonix/evidence/video-frames/
+*.png
+*.jpg
+*.jpeg
+
+# 状态中的运行时 checkpoint 残影（保留 handoffs 和 routing-log）
+.reasonix/state/continuity/
+.reasonix/state/checkpoints/
+
+# 报告中的旧会话历史
+.reasonix/reports/gate-review-*.json
+.reasonix/reports/gate-review-*.md
+.reasonix/reports/repair-log-*.json
+.reasonix/reports/checkpoint-resume-verify.json
+.reasonix/reports/multi-agent-sample.json
+.reasonix/reports/security-scan-result.json
+
+# 交叉验证残影
+.reasonix/registry/cross-verify-*.json
+
+# 知识库备份
+.reasonix/evidence/memory-root-cutover-backup/
+
+# 密钥相关的 create_token
+.reasonix/autoresearch/**/.create_token
+
+# 系统文件
+.DS_Store
+Thumbs.db

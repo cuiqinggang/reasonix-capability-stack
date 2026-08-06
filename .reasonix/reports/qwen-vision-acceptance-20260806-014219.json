@@ -1,0 +1,43 @@
+{
+  "acceptance": {
+    "task": "接入并验证 OpenRouter 千问 235B 高精度视觉复核模型",
+    "time": "2026-08-06T01:42:19+08:00",
+    "result": "PASS",
+    "steps": [
+      {
+        "step": 1,
+        "item": "配置核对",
+        "detail": "OpenRouter 目录确认 qwen/qwen3-vl-235b-a22b-instruct 存在且 architecture.modality=text+image->text、input_modalities=[text,image]（官方支持图片输入）；OPENROUTER_API_KEY 环境变量在位（仅确认存在，未查看值）。注：config.toml 未见 openrouter provider 段，调用走官方端点+环境变量密钥",
+        "status": "PASS"
+      },
+      {
+        "step": 2,
+        "item": "一次真实视觉理解调用",
+        "detail": "模型 qwen/qwen3-vl-235b-a22b-instruct HTTP 200，耗时 8911ms，usage total_tokens=321，输入复用非敏感测试图 vision-test-20260806-013020.png",
+        "status": "PASS"
+      },
+      {
+        "step": 3,
+        "item": "双层视觉策略更新",
+        "detail": "reasonix-vision-review：常规视觉 = glm-4.6v-flash；复杂视觉复核 = qwen/qwen3-vl-235b-a22b-instruct（SKILL.md frontmatter + 状态声明 + 模式B 双层策略）",
+        "status": "PASS"
+      },
+      {
+        "step": 4,
+        "item": "无密钥测试证据",
+        "detail": "证据 evidence\\qwen-vision-evidence-20260806-014156.json + 本验收文件；api_keys_printed=false, api_keys_persisted=false",
+        "status": "PASS"
+      }
+    ],
+    "evidence_file": "evidence\\qwen-vision-evidence-20260806-014156.json",
+    "verification": {
+      "mentions_red_circle": true,
+      "mentions_blue_shape": true,
+      "mentions_text": true
+    },
+    "content_based": true,
+    "api_keys_printed": false,
+    "api_keys_persisted": false,
+    "scope": "仅 qwen/qwen3-vl-235b-a22b-instruct 单次图片调用；未调用视频/文件/音频/第二次模型调用；未修改默认 deepseek-v4-flash；未新增任何模型/技能/MCP/自动化/子智能体"
+  }
+}

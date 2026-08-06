@@ -1,0 +1,89 @@
+{
+  "schema": "reasonix-maturity-preflight-v1",
+  "timestamp": "2026-08-06T18:42:00+08:00",
+  "task": "成熟态 AI Coding SuperTool 生态站 — 运行态升级 preflight 基线",
+  "pre_upgrade_score": 77.5,
+  
+  "cross_checks": {
+    "A_skills_index_vs_disk": {
+      "status": "PASS",
+      "detail": "skills-index.json 7 技能与 skills/ 7 目录一一对应，每个目录含 SKILL.md",
+      "mismatches": []
+    },
+    "B_commands_integrity": {
+      "status": "PASS",
+      "detail": "11 文件（10 命令 + README），全部非空，含必填字段（命令名/触发时机/执行步骤/输出要求）",
+      "file_count": 11,
+      "command_count": 10,
+      "new_in_stage2": ["maturity-preflight.md", "maturity-postflight.md"]
+    },
+    "C_capability_vs_evidence": {
+      "status": "PASS",
+      "detail": "14 子能力状态与证据一致，无矛盾",
+      "verified": [
+        {"id": "CAP-01", "status": "CORE_PASS", "evidence_match": "EVD-001 (structure)"},
+        {"id": "CAP-02", "status": "CORE_PASS", "evidence_match": "EVD-002 (structure)"},
+        {"id": "CAP-03", "status": "CORE_PASS", "evidence_match": "结构校验：tool-registry.json 106工具"},
+        {"id": "CAP-04", "status": "CORE_PASS", "evidence_match": "runtime-verify.json ALL_PASS 15/15"},
+        {"id": "CAP-05", "status": "CORE_PASS", "evidence_match": "ENTRY.md 内容覆盖 10命令+7技能"},
+        {"id": "CAP-06", "status": "CORE_PASS", "evidence_match": "目录存在+非空"},
+        {"id": "CAP-07", "status": "CORE_PASS", "evidence_match": "gate-review 005735→005800 闭环"},
+        {"id": "CAP-08", "status": "CORE_PASS", "evidence_match": "repair-log 2轮 REPAIRED"},
+        {"id": "CAP-09", "status": "PASS_SMALL_SAMPLE_ONLY", "evidence_match": "multi-agent-sample.json 2子智能体×1轮"},
+        {"id": "CAP-10a", "status": "PASS_REAL_CALL", "evidence_match": "vision-call-evidence + qwen-vision-evidence 双模型 HTTP 200"},
+        {"id": "CAP-10b", "status": "FAIL_RATE_LIMIT_429", "evidence_match": "video-call-evidence HTTP 429"},
+        {"id": "CAP-10c", "status": "READY_PENDING_CLIENT_VIDEO_TRANSPORT", "evidence_match": "无证据，待授权"},
+        {"id": "CAP-11", "status": "PASS_STRUCTURE_AND_CONSISTENCY_ONLY", "evidence_match": "checkpoint-resume-verify 7/7 同会话"},
+        {"id": "CAP-12", "status": "PASS_STRUCTURE_AND_CONSISTENCY_ONLY", "evidence_match": "checkpoint-resume-verify 7/7 同会话"}
+      ]
+    },
+    "D_directory_contract": {
+      "status": "PASS",
+      "detail": "ENTRY.md 目录契约 10 目录与实际完全一致（含 autoresearch/ LEGACY 标记）",
+      "contract_dirs": ["commands","rules","registry","references","reports","evidence","state","scripts","skills","autoresearch"],
+      "actual_dirs": 10,
+      "mismatches": []
+    }
+  },
+
+  "status_classification": {
+    "PASS_REAL": [
+      {"id": "CAP-10a", "name": "图片/截图/OCR 多模态", "evidence": "glm-4.6v-flash + qwen3-vl-235b 双模型 HTTP 200"}
+    ],
+    "STRUCTURE_ONLY": [
+      {"id": "CAP-01", "name": "成熟规则"},
+      {"id": "CAP-02", "name": "成熟技能索引"},
+      {"id": "CAP-03", "name": "成熟工具/插件生态资料"},
+      {"id": "CAP-04", "name": "成熟自动化流程"},
+      {"id": "CAP-05", "name": "成熟轻入口"},
+      {"id": "CAP-06", "name": "成熟重资料库"},
+      {"id": "CAP-07", "name": "Gate Review（模拟闭环）"},
+      {"id": "CAP-08", "name": "Repair Loop（模拟闭环）"},
+      {"id": "CAP-09", "name": "多智能体分工（2×1小样本）"},
+      {"id": "CAP-11", "name": "长任务承载"},
+      {"id": "CAP-12", "name": "checkpoint/resume/handoff"}
+    ],
+    "FAIL": [
+      {"id": "CAP-10b", "name": "GLM 原生视频理解", "reason": "HTTP 429"}
+    ],
+    "PENDING": [
+      {"id": "CAP-10c", "name": "本地 MP4 直传", "reason": "待用户授权"}
+    ]
+  },
+
+  "stage1_fixes_applied": [
+    "ENTRY.md: vision-review CORE_PASS → PASS_REAL_CALL",
+    "skills-index.json: capability 文本 CORE_PASS → PASS_REAL_CALL + 双模型引用",
+    "SKILLS_INDEX.md: 表格 CORE_PASS → PASS_REAL_CALL",
+    "CAPABILITY_MATRIX.json: core_pass 9→8",
+    "CAPABILITY_MATRIX.md: 汇总 11通过→12通过",
+    "HANDOFF-SUMMARY.md: doctor 标注'当前会话未复跑'",
+    "ENTRY.md: 目录契约添加 autoresearch/ LEGACY 标记"
+  ],
+
+  "hash_summary": {
+    "files_checked": 45,
+    "total_size_kb": "~150",
+    "no_keys_exposed": true
+  }
+}

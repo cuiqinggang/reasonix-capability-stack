@@ -1,0 +1,48 @@
+﻿{
+    "version":  "1.0.0",
+    "verdict":  "ALL_PASS",
+    "timestamp":  "2026-08-06T04:32:54.0225055+08:00",
+    "subsystems":  [
+                       {
+                           "checks_total":  46,
+                           "pass":  true,
+                           "name":  "verify-runtime",
+                           "detail":  "verdict=ALL_PASS checks=46/46",
+                           "checks_passed":  46
+                       },
+                       {
+                           "checks_total":  1,
+                           "pass":  true,
+                           "name":  "skill-index",
+                           "detail":  "cross-verify: all_consistent=True file=cross-verify-20260806-043257.json",
+                           "checks_passed":  1
+                       },
+                       {
+                           "checks_total":  1,
+                           "pass":  true,
+                           "name":  "continuity",
+                           "detail":  "task=absorb-10step status=CLOSED_PASS completed=10/10",
+                           "checks_passed":  1
+                       },
+                       {
+                           "checks_total":  1,
+                           "pass":  true,
+                           "name":  "routing-log",
+                           "detail":  "lines=23 types=9 json_ok=True monotonic=True",
+                           "checks_passed":  1
+                       },
+                       {
+                           "checks_total":  1,
+                           "pass":  true,
+                           "name":  "evidence",
+                           "detail":  "schema=reasonix-evidence-manifest-v1 evidence_files=32 registered=4",
+                           "checks_passed":  1
+                       }
+                   ],
+    "summary":  {
+                    "failed":  0,
+                    "total":  5,
+                    "passed":  5
+                },
+    "reasonix_root":  "C:\\Users\\A\\AppData\\Roaming\\reasonix\\global-workspace\\.reasonix"
+}
